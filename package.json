@@ -4,14 +4,20 @@
   "description": "Mission Statement: As BYU alumni, we have frequently witnessed married students struggling to navigate college life and parenthood. We intend to \r help those families learn how to solve common problems that arise early on. These range from budgeting to basic baby care.",
   "main": "index.js",
   "scripts": {
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "knex": "^3.1.0",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }
