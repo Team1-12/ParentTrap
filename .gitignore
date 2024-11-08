@@ -15,6 +15,9 @@
 # To set-up create a file in /ParentTrap called .env and then place it below like this:
 .env
 
+# Ignore node_modules folder. pushing this to main can cause issues when multiple people have different computers as node_modules contain OS specific downloads
+node_modules/
+
 # Here is an example of what i have in my .env file, this will all be pulled into /backend/config.js
 
 # PORT=3000

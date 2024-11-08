@@ -22,6 +22,7 @@ Description: This application will help new or soon-to-be parents prepare for th
   - Models: Contains files that use models to recreate the structure a db table(columns) by making an object. Model objects can be imported into other files and have method that
             let you do CRUD operations in those other .js files
   - Index.js: The main entry point for the backend server. It initializes the Express application, sets up routes, and starts the server.
+  
   IN-FRONTEND
   - CSS: contains css files
   - JS: Contains client-side .js files used for adding funtionality to the frontend, such as handling button clicks, form validation, or updating content dynamically
