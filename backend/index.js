@@ -25,15 +25,20 @@ const knex = require("knex") ({
 })
 
 app.set("view engine", "ejs") //shows what view engine we are using 
-app.set("views", path.join(__dirname, "views")) //This is telling the server that we are going to start using certain views
+app.set("views", path.join(__dirname, "../frontend/views")) //This is telling the server that we are going to start using certain views
 
 app.use(express.urlencoded({extended: true})); //allows us to get data out of the request.body
 
+app.get("/", (req, res) => {
+
+    res.render("landingPage", {}); 
+});
 //goes to the login page
 app.get("/login", (req, res) =>
 {
     // no need to specify the extension because we already did in the view engine
     res.render("loginpage", {})
 });
+
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
