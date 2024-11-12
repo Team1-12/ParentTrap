@@ -29,5 +29,11 @@ app.set("views", path.join(__dirname, "views")) //This is telling the server tha
 
 app.use(express.urlencoded({extended: true})); //allows us to get data out of the request.body
 
+//goes to the login page
+app.get("/login", (req, res) =>
+{
+    // no need to specify the extension because we already did in the view engine
+    res.render("loginpage", {})
+});
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
