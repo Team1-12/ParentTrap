@@ -29,6 +29,10 @@ app.set("views", path.join(__dirname, "../frontend/views")) //This is telling th
 
 app.use(express.urlencoded({extended: true})); //allows us to get data out of the request.body
 
+// Serve static files from the 'CSS' directory
+app.use('/CSS', express.static(path.join(__dirname, '../frontend/css')));
+
+//goes to the landing page
 app.get("/", (req, res) => {
 
     res.render("landingPage", {}); 
@@ -38,6 +42,11 @@ app.get("/login", (req, res) =>
 {
     // no need to specify the extension because we already did in the view engine
     res.render("loginpage", {})
+});
+
+app.get("/signup", (req, res) =>
+{
+    res.render("signuppage", {})
 });
 
 // app listening
