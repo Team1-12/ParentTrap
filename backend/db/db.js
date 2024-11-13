@@ -1,4 +1,3 @@
-// backend/db/db.js
 // This file holds the database connection info. This is imported into the models files and will no longer need to be called in the index.js files
 const knex = require("knex");
 const config = require("../config/config");
