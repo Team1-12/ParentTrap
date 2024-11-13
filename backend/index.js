@@ -19,16 +19,16 @@ app.use(express.urlencoded( {extended: true} )) //determines how html is receive
 // This is an object literal. Basically a dictionary
 
 //Allows us to grab data from Postgress
-const knex = require("knex") ({
-    client : "pg",
-    connection : {
-        host : "localhost",
-        user : "postgres",
-        password : "", //Fill in - dynamically?
-        database : "", //Fill in - dynamically?
-        port : 5432
-    }
-})
+// const knex = require("knex") ({
+//     client : "pg",
+//     connection : {
+//         host : "localhost",
+//         user : "postgres",
+//         password : "", //Fill in - dynamically?
+//         database : "", //Fill in - dynamically?
+//         port : 5432
+//     }
+// })
 
 app.set("view engine", "ejs") //shows what view engine we are using 
 app.set("views", path.join(__dirname, "../frontend/views")) //This is telling the server that we are going to start using certain views
