@@ -7,28 +7,38 @@ let app = express(); // app is now an object of express type. App is variable of
 
 let path = require('path'); // access to the path 
 
+// lets you import your .env variables from config.js
+const config = require('./config/config'); 
+
+// Importing Users model used to run CRUD operations on db table for user table
+const Users = require("./models/users");
+
 let port = 5001
 
 app.use(express.urlencoded( {extended: true} )) //determines how html is received from forms. This allows us to grab stuff out of the HTML form
 // This is an object literal. Basically a dictionary
 
 //Allows us to grab data from Postgress
-const knex = require("knex") ({
-    client : "pg",
-    connection : {
-        host : "localhost",
-        user : "postgres",
-        password : "", //Fill in - dynamically?
-        database : "", //Fill in - dynamically?
-        port : 5432
-    }
-})
+// const knex = require("knex") ({
+//     client : "pg",
+//     connection : {
+//         host : "localhost",
+//         user : "postgres",
+//         password : "", //Fill in - dynamically?
+//         database : "", //Fill in - dynamically?
+//         port : 5432
+//     }
+// })
 
 app.set("view engine", "ejs") //shows what view engine we are using 
 app.set("views", path.join(__dirname, "../frontend/views")) //This is telling the server that we are going to start using certain views
 
 app.use(express.urlencoded({extended: true})); //allows us to get data out of the request.body
 
+// Serve static files from the 'CSS' directory
+app.use('/CSS', express.static(path.join(__dirname, '../frontend/css')));
+
+//goes to the landing page
 app.get("/", (req, res) => {
 
     res.render("landingPage", {}); 
@@ -39,6 +49,38 @@ app.get("/login", (req, res) =>
     // no need to specify the extension because we already did in the view engine
     res.render("loginpage", {})
 });
+
+app.get("/signup", (req, res) =>
+{
+    res.render("signuppage", {})
+});
+
+
+// I will delete all of this later
+//EXAMPLE of how we connect in index.js using .env
+// const knex = require("knex") ({
+//     client : "pg",
+//     connection : {
+//         host : config.db.host,
+//         user : config.db.user,
+//         password : config.db.password, //Fill in - dynamically?
+//         database : config.db.name, //Fill in - dynamically?
+//         port : config.db.port
+//     }
+// })
+
+// app.post('/signup', (req,res) =>{
+//     knex('users').insert(req.body).then(home => {
+//         res.redirect('/')
+//     })
+// });
+
+// For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
+app.post("/signup", (req, res) => {
+    Users.createUser(req.body) // Using Users model to insert new user
+        .then(() => res.redirect("/"))
+    });
+
 
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
