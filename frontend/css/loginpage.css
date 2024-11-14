@@ -37,6 +37,7 @@ body {
     max-height: 80vh;
     min-height: 300px;
     text-align: center;
+    scale: auto;
 }
 
 .login-container h1 {
@@ -84,7 +85,7 @@ body {
     max-height: 80vh; /* Maximum height */
     overflow-y: auto; /* Scrollable if needed */
     text-align: center;
-    scale: 0.7;
+    scale: auto;
 }
 
 .signup-container h1 {
@@ -163,6 +164,7 @@ body {
     color: #0288d1;
     font-size: 2.0em; 
     overflow: auto;
+    scale: auto;
 }
 
 
