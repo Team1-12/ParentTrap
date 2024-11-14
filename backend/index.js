@@ -18,17 +18,7 @@ let port = 5001
 app.use(express.urlencoded( {extended: true} )) //determines how html is received from forms. This allows us to grab stuff out of the HTML form
 // This is an object literal. Basically a dictionary
 
-//Allows us to grab data from Postgress
-// const knex = require("knex") ({
-//     client : "pg",
-//     connection : {
-//         host : "localhost",
-//         user : "postgres",
-//         password : "", //Fill in - dynamically?
-//         database : "", //Fill in - dynamically?
-//         port : 5432
-//     }
-// })
+
 
 app.set("view engine", "ejs") //shows what view engine we are using 
 app.set("views", path.join(__dirname, "../frontend/views")) //This is telling the server that we are going to start using certain views
@@ -56,30 +46,14 @@ app.get("/signup", (req, res) =>
 });
 
 
-// I will delete all of this later
-//EXAMPLE of how we connect in index.js using .env
-// const knex = require("knex") ({
-//     client : "pg",
-//     connection : {
-//         host : config.db.host,
-//         user : config.db.user,
-//         password : config.db.password, //Fill in - dynamically?
-//         database : config.db.name, //Fill in - dynamically?
-//         port : config.db.port
-//     }
-// })
 
-// app.post('/signup', (req,res) =>{
-//     knex('users').insert(req.body).then(home => {
-//         res.redirect('/')
-//     })
-// });
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
     Users.createUser(req.body) // Using Users model to insert new user
         .then(() => res.redirect("/"))
     });
+
 
 
 // app listening
