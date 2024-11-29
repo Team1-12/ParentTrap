@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+          <tr> <!--Creates table headers for the top row-->
+            <th>Milestone Date</th>
+            <th>Milestone Name</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+    <tbody>
+        <% if (milestone.length > 0) { %>
+            <% milestone.forEach(row => { %>
+              <tr>
+                <!-- id and poke type id hidden from the user so we can use them to access data for our other pages -->
+                <input type="hidden" value="row.milestoneid">
+                <input type="hidden" value="row.childid">
+                <!-- below are the different attributes that are inputed into the table -->
+                <td><%= row.milestonedate %></td>
+                <td><%= row.milestonetitle %></td>
+                <td><%= row.milestonedescription %></td>
+              </tr>
+            <% }) %>
+    </tbody>
+</body>
+</html>
