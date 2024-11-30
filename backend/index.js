@@ -2,18 +2,12 @@
 // This is the source code for a baby planning website to bless the live of countless future parents
 // Import express as express
 let express = require('express');
+let app = express(); 
+let path = require('path');
 
-let app = express(); // app is now an object of express type. App is variable of the whole website
-
-let path = require('path'); // access to the path 
-
-// lets you import your .env variables from config.js
-const config = require('./config/config'); 
-
-// Importing Users model used to run CRUD operations on db table for user table
 const Users = require("./models/users");
-
-let port = 5001
+const config = require('./config/config'); 
+let port = config.port
 
 app.use(express.urlencoded( {extended: true} )) //determines how html is received from forms. This allows us to grab stuff out of the HTML form
 // This is an object literal. Basically a dictionary
