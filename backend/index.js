@@ -19,7 +19,6 @@ app.use(express.urlencoded( {extended: true} )) //determines how html is receive
 // This is an object literal. Basically a dictionary
 
 
-
 app.set("view engine", "ejs") //shows what view engine we are using 
 app.set("views", path.join(__dirname, "../frontend/views")) //This is telling the server that we are going to start using certain views
 
