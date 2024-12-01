@@ -39,13 +39,19 @@ app.get("/signup", (req, res) =>
     res.render("signuppage", {})
 });
 
-
+app.get("/homepage", (req, res) =>
+    {
+        res.render("homepage", {})
+    });
 
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
     Users.createUser(req.body) // Using Users model to insert new user
-        .then(() => res.redirect("/"))
+        .then(() => res.redirect("./homepage")).catch(error => {
+            console.error('Error inserting data:', error);
+            res.status(500).send('Internal Server Error');
+          });
     });
 
 
