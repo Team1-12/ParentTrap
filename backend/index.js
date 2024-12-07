@@ -2,18 +2,12 @@
 // This is the source code for a baby planning website to bless the live of countless future parents
 // Import express as express
 let express = require('express');
+let app = express(); 
+let path = require('path');
 
-let app = express(); // app is now an object of express type. App is variable of the whole website
-
-let path = require('path'); // access to the path 
-
-// lets you import your .env variables from config.js
-const config = require('./config/config'); 
-
-// Importing Users model used to run CRUD operations on db table for user table
 const Users = require("./models/users");
-
-let port = 5001
+const config = require('./config/config'); 
+let port = config.port
 
 app.use(express.urlencoded( {extended: true} )) //determines how html is received from forms. This allows us to grab stuff out of the HTML form
 // This is an object literal. Basically a dictionary
@@ -44,7 +38,7 @@ app.get("/signup", (req, res) =>
     res.render("signuppage", {})
 });
 
-//goes to the landing page
+//goes to the home page
 app.get("/homepage", (req, res) => {
 
     res.render("homepage", {}); 
@@ -54,7 +48,10 @@ app.get("/homepage", (req, res) => {
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
     Users.createUser(req.body) // Using Users model to insert new user
-        .then(() => res.redirect("/"))
+        .then(() => res.redirect("./homepage")).catch(error => {
+            console.error('Error inserting data:', error);
+            res.status(500).send('Internal Server Error');
+          });
     });
 
 

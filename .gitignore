@@ -16,8 +16,12 @@
 .env
 
 # Ignore node_modules folder. pushing this to main can cause issues when multiple people have different computers as node_modules contain OS specific downloads
-node_modules/
 
+
+*.zip
+node_modules/
+.DS_Store
+__MACOSX
 # Here is an example of what i have in my .env file, this will all be pulled into /backend/config.js
 
 # PORT=3000

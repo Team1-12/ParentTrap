@@ -1,4 +1,4 @@
-// This is an example of a model for a user table in the db. This allows us to create a Users object that has prewritten CRUD operations that can be called into index.js
+// This is an example of a model for a user table in the db. This allows us to create a Users object that has pre-written CRUD operations that can be called into index.js
 const db = require("../db/db");
 
 const Users = {
