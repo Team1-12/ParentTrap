@@ -44,7 +44,11 @@ app.get("/signup", (req, res) =>
     res.render("signuppage", {})
 });
 
+//goes to the landing page
+app.get("/homepage", (req, res) => {
 
+    res.render("homepage", {}); 
+});
 
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
