@@ -61,14 +61,9 @@ app.get("/mileStone", (req, res) => {
     res.render("mileStone", {}); 
 });
 
-//goes to the record display page
-app.get("/displayMileStone", (req, res) => {
-
-    res.render("displayMileStone", {}); 
-});
 
 //Route to display milestone records 
-app.get('/', (req, res) => {
+app.get('/displayMileStone', (req, res) => {
     knex('milestones')
       .select(
         'milestoneid',
@@ -79,7 +74,7 @@ app.get('/', (req, res) => {
       )
       .then(milestones => {
         // Render the index.ejs template and pass the data
-        res.render('index', { milestones });
+        res.render('displayMileStone', { milestones });
       })
       // Memorize or paste in to the end of all 
       .catch(error => {
@@ -111,6 +106,7 @@ app.get("/mileStone", (req, res) =>
     {
         knex('milestones')
             .select(
+            'milestoneid',
             'milestonetitle',
             'milestonedesription',
             'milestonedate'    
