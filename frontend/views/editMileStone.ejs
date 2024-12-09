@@ -9,10 +9,8 @@
     <h1 style="text-align: center;">Edit MileStone Record</h1>
   
   <!-- it's ok to use the same rout as long as you use a different method -->
-  <form action="/editMileStone/<%= pokemon.id %>" method="POST">
+  <form action="/editMileStone/<%= milestone.id %>" method="POST">
     
-    
-
     <!-- Pokémon Description -->
     <label for="description">Description</label>
     <input type="text" id="description" name="description" value="<%= pokemon.description %>" required oninput="this.value = this.value.toUpperCase()">
