@@ -23,33 +23,11 @@
     <label for="date_created">Date Created</label>
     <input type="date" id="date_created" name="date_created" value="<%= pokemon.date_created.toISOString().split('T')[0] %>" required>
     
-    <!-- Active Pokémon (Checkbox) -->
-    <label for="active_poke">
-      <input type="checkbox" id="active_poke" name="active_poke" value="true" <%= pokemon.active_poke ? 'checked' : '' %>>
-      Active Pokémon
-    </label>
+    
 
-    <!-- Gender (Radio Buttons) -->
-    <label>Gender</label>
-    <label>
-      <input type="radio" name="gender" value="M" <%= pokemon.gender === 'M' ? 'checked' : '' %>> Male
-    </label>
-    <label>
-      <input type="radio" name="gender" value="F" <%= pokemon.gender === 'F' ? 'checked' : '' %>> Female
-    </label>
-    <label>
-      <input type="radio" name="gender" value="U" <%= pokemon.gender === 'U' ? 'checked' : '' %>> Unknown
-    </label>
+    
 
-    <!-- Pokémon Type -->
-    <label for="poke_type_id">Pokémon Type</label>
-    <select id="poke_type_id" name="poke_type_id">
-      <% poke_types.forEach(type => { %>
-        <option value="<%= type.id %>" <%= pokemon.poke_type_id === type.id ? 'selected' : '' %>>
-          <%= type.description %>
-        </option>
-      <% }) %>
-    </select>
+   
 
     <!-- Submit Button -->
     <button type="submit">Save Changes</button>
