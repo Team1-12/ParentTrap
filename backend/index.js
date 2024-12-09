@@ -44,6 +44,11 @@ app.get("/homepage", (req, res) => {
     res.render("homepage", {}); 
 });
 
+//goes to the home page
+app.get("/mileStone", (req, res) => {
+
+    res.render("mileStone", {}); 
+});
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
