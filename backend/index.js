@@ -113,5 +113,72 @@ app.get("/mileStone", (req, res) =>
                 });
     })  
 
+
+// Authentication middleware
+function isAuthenticated(req, res, next) {
+    if (req.session && req.session.isAuthenticated) {
+      // User is authenticated, proceed to the next middleware
+      return next();
+    } else {
+      // User is not authenticated, redirect to login page
+      res.redirect('/login');
+    }
+  }
+
+// This will login the user and redirect them
+    app.post('/login', (req, res) => {
+        const { username, password } = req.body;
+      
+        if (!username || !password) {
+          return res.render('login', { error: 'Username and password are required.' });
+        }
+      
+        // Query the database to check if the username and password exist
+        knex('admin')
+          .select('*')
+          .where({ username, password }) // Note: Storing plaintext passwords is insecure
+          .first()
+          .then(user => {
+            if (user) {
+              // Set session variables
+              req.session.isAuthenticated = true;
+              req.session.volunteerid = user.volunteerid; // Store volunteerid in the session
+      
+              req.session.save(err => {
+                if (err) {
+                  console.error('Session save error:', err);
+                  return res.status(500).send('Internal Server Error');
+                }
+      
+                // Redirect based on the user's role
+                if (user.isAuthenticated === true) {
+                  res.redirect('/displayMileStone'); // Redirect to milestone page
+                } 
+              });
+            } else {
+              // Render login page with error if invalid credentials
+              res.render('login', { error: 'Invalid username or password.' });
+            }
+          })
+          .catch(err => {
+            console.error('Database error:', err);
+            res.status(500).send('Internal Server Error');
+          });
+      });
+
+// Logout endpoint
+app.get('/logout', (req, res) => {
+    // Destroy the session
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).send('Failed to log out. Please try again.');
+      }
+      // Redirect to home page or login page after logout
+      res.redirect('/login'); // Or replace with '/' if you want to redirect to the homepage
+    });
+  });
+
+
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
