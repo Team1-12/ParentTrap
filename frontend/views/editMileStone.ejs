@@ -3,34 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Edit Milestone</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1 style="text-align: center;">Edit MileStone Record</h1>
-  
-  <!-- it's ok to use the same rout as long as you use a different method -->
-  <form action="/editMileStone/<%= milestone.id %>" method="POST">
-    
-    <!-- Pokémon Description -->
-    <label for="description">Description</label>
-    <input type="text" id="description" name="description" value="<%= pokemon.description %>" required oninput="this.value = this.value.toUpperCase()">
-    
-    <!-- Base Total -->
-    <label for="base_total">Base Total</label>
-    <input type="number" id="base_total" name="base_total" value="<%= pokemon.base_total %>" required>
-    
-    <!-- Date Created -->
-    <label for="date_created">Date Created</label>
-    <input type="date" id="date_created" name="date_created" value="<%= pokemon.date_created.toISOString().split('T')[0] %>" required>
-    
-    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Milestone Tracker</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Milestones</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-    
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">Edit Milestone</h1>
+        
+        <!-- Edit Form -->
+        <form action="/editMileStone/<%= milestone.id %>" method="POST" class="p-4 border rounded shadow-sm">
+            <!-- Hidden Field for ID -->
+            <input type="hidden" name="id" value="<%= milestone.id %>">
+            
+            <!-- Milestone Name -->
+            <div class="mb-3">
+                <label for="milestonetitle" class="form-label">Milestone Name</label>
+                <input 
+                    type="text" 
+                    id="milestonetitle" 
+                    name="milestonetitle" 
+                    class="form-control" 
+                    value="<%= milestone.milestonetitle %>" 
+                    required>
+            </div>
+            
+            <!-- Trimester -->
+            <div class="mb-3">
+                <label for="trimester" class="form-label">Trimester</label>
+                <select id="trimester" name="trimester" class="form-select" required>
+                    <option value="1" <%= milestone.trimester === '1' ? 'selected' : '' %>>1</option>
+                    <option value="2" <%= milestone.trimester === '2' ? 'selected' : '' %>>2</option>
+                    <option value="3" <%= milestone.trimester === '3' ? 'selected' : '' %>>3</option>
+                </select>
+            </div>
+            
+            <!-- Date of Milestone -->
+            <div class="mb-3">
+                <label for="milestonedate" class="form-label">Date of Milestone</label>
+                <input 
+                    type="date" 
+                    id="milestonedate" 
+                    name="milestonedate" 
+                    class="form-control" 
+                    value="<%= milestone.milestonedate.toISOString().split('T')[0] %>" 
+                    required>
+            </div>
+            
+            <!-- Journal Entry -->
+            <div class="mb-3">
+                <label for="journalentry" class="form-label">Journal Entry</label>
+                <textarea 
+                    id="journalentry" 
+                    name="journalentry" 
+                    class="form-control" 
+                    rows="4" 
+                    required><%= milestone.journalentry %></textarea>
+            </div>
+            
+            <!-- Update Button -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </main>
 
-   
-
-    <!-- Submit Button -->
-    <button type="submit">Save Changes</button>
-  </form>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
