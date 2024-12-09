@@ -1,54 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MileStone Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/loginpage.css">
+  <title>MileStone Form</title>
 </head>
 <body>
-    <section>
-        <div class="container">
-            <h2>Milestone Form</h2>
-            <form id="MileStoneForm" method="post" action="/submitMileStoneForm">
+  <section>
+    <div class="login-container">
+      <h1>Milestone Form</h1>
+      <form id="MileStoneForm" method="post" action="/submitMileStoneForm">
 
-                <div class="form-group">
-                    <label for="milestoneOptions">Select Milestone *</label>
-                    <select class="form-control" name="MilestoneOptions" id="milestoneOptions" required>
-                        <option value="firstPositiveTest">First Positive Pregnancy Test</option>
-                        <option value="firstDoctorVisit">First Doctor’s Appointment</option>
-                        <option value="firstUltrasound">First Ultrasound</option>
-                        <option value="hearHeartbeat">Hearing Baby’s Heartbeat</option>
-                        <option value="genderReveal">Finding Out Baby's Gender</option>
-                        <option value="firstFetalMovement">First Fetal Movement</option>
-                        <option value="babyShower">Baby Shower</option>
-                        <option value="thirdTrimesterStart">Third Trimester Start</option>
-                        <option value="packingForHospital">Packing for Hospital</option>
-                        <option value="dueDate">Due Date</option>
-                        <option value="firstContractions">First Contractions or Labor Signs</option>
-                        <option value="babyBirth">Baby’s Birth</option>
-                        <option value="postpartumCheckup">Postpartum Check-Up</option>
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="trimester">Trimester *</label>
-                    <select class="form-control" name="Trimester" id="trimester" required>
-                        <option value="firstTrimester">First Trimester</option>
-                        <option value="secondTrimester">Second Trimester</option>
-                        <option value="thirdTrimester">Third Trimester</option>
-                    </select>
-                </div>
-    
-                <div class="form-group">
-                    <label for="milestoneDate">Date of Milestone *</label>
-                    <input class="form-control" type="date" id="milestoneDate" name="MilestoneDate" required />
-                </div>
-    
-                <div class="form-group">
-                    <label for="milestoneNotes">Additional Notes</label>
-                    <input class="form-control" type="text" id="milestoneNotes" name="MilestoneNotes" placeholder="Enter any additional notes here" />
-                </div>
-    
-                <button class="btn btn-primary" type="submit">Submit Information</button>             
+        <div class="form-group">
+          <label for="milestoneOptions">Select Milestone *</label>
+          <select style="margin: 15px;" name="MilestoneOptions" id="milestoneOptions" required>
+            <option value="firstTrimester">Please Select an Option</option>
+            <option value="firstPositiveTest">First Positive Pregnancy Test</option>
+            <option value="firstDoctorVisit">First Doctor’s Appointment</option>
+            <option value="firstUltrasound">First Ultrasound</option>
+            <option value="hearHeartbeat">Hearing Baby’s Heartbeat</option>
+            <option value="genderReveal">Finding Out Baby's Gender</option>
+            <option value="firstFetalMovement">First Fetal Movement</option>
+            <option value="babyShower">Baby Shower</option>
+            <option value="thirdTrimesterStart">Third Trimester Start</option>
+            <option value="packingForHospital">Packing for Hospital</option>
+            <option value="dueDate">Due Date</option>
+            <option value="firstContractions">First Contractions or Labor Signs</option>
+            <option value="babyBirth">Baby’s Birth</option>
+            <option value="postpartumCheckup">Postpartum Check-Up</option>
+          </select>
+          <span class="error-message">This field is required.</span>
+        </div>
+  
+        <div style="margin-top: 5px;" class="form-group">
+          <label for="trimester">Trimester *</label>
+          <select style="margin-top: 15px;" name="Trimester" id="trimester" required>
+            <option value="firstTrimester">Please Select an Option</option>
+            <option value="firstTrimester">First Trimester</option>
+            <option value="secondTrimester">Second Trimester</option>
+            <option value="thirdTrimester">Third Trimester</option>
+          </select>
+          <span class="error-message">This field is required.</span>
+        </div>
+  
+        <div class="container">
+          <div class="form-group" style="width: 80%;">
+            <label for="milestoneDate">Date of Milestone *</label>
+            <input style="margin: 15px;" type="date" id="milestoneDate" name="MilestoneDate" required />
+            <span class="error-message">Please select a date.</span>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="milestoneNotes">Journaling</label>
+          <textarea style="margin-top: 15px;" id="milestoneNotes" name="MilestoneNotes" placeholder="Record the excitement, fun, and emotion of the milestone!" rows="5" style="width: 150%;"></textarea>
+        </div>
+  
+        <button class="submit-button" type="submit">Submit Information</button>             
+      </form>
+    </div>
+  </section>
 </body>
 </html>

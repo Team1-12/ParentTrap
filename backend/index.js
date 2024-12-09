@@ -59,7 +59,22 @@ app.post("/signup", (req, res) => {
           });
     });
 
-
+app.get("/mileStone", (req, res) =>
+    {
+        knex('milestones')
+            .select(
+            'milestonetitle',
+            'milestonedesription',
+            'milestonedate'    
+            )
+            .then(milestone => {  
+                res.render('index', { milestone });
+            })
+            .catch(error => {
+                console.error('Error querying database:', error);
+                res.status(500).send('Internal Server Error');
+                });
+    })  
 
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
