@@ -9,6 +9,17 @@ const Users = require("./models/users");
 const config = require('./config/config'); 
 let port = config.port
 
+const knex = require("knex") ({
+    client : "pg",
+    connection : {
+        host : process.env.RDS_HOSTNAME || "awseb-e-ygbwfxmnac-stack-awsebrdsdatabase-nwarovbddchx.cna8yiecw5c6.us-east-1.rds.amazonaws.com",
+        user : process.env.RDS_USERNAME || "babydata",
+        password : process.env.RDS_PASSWORD || "splishsplash",
+        database : process.env.RDS_DB_NAME || "ebdb",
+        port : process.env.RDS_PORT || 5432,
+        ssl: {rejectUnauthorized: false}
+    }
+  });
 app.use(express.urlencoded( {extended: true} )) //determines how html is received from forms. This allows us to grab stuff out of the HTML form
 // This is an object literal. Basically a dictionary
 
