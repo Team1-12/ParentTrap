@@ -7,7 +7,9 @@ let path = require('path');
 
 const Users = require("./models/users");
 const config = require('./config/config'); 
-let port = config.port
+const port = process.env.PORT || 5001
+
+const session = require('express-session'); 
 
 const knex = require("knex") ({
     client : "pg",
