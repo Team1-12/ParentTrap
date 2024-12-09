@@ -50,6 +50,12 @@ app.get("/mileStone", (req, res) => {
     res.render("mileStone", {}); 
 });
 
+//goes to the home page
+app.get("/displayMileStone", (req, res) => {
+
+    res.render("displayMileStone", {}); 
+});
+
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
     Users.createUser(req.body) // Using Users model to insert new user
