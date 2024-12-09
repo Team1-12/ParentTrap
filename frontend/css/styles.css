@@ -1,81 +1,315 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Pacifico&display=swap');
 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.banner {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background-color: #b2ebf2; /* Slightly darker blue */
+    color: #ffffff; /* White letters */
+    text-align: center;
+    line-height: 25px; /* Center text vertically */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.5em;
+    font-family: 'Pacifico', cursive;
+}
+
+.login-container {
+    background-color: #ffffff;
+    border: 2px solid #0288d1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30vw;
+    max-width: 400px;
+    min-width: 250px;
+    height: auto;
+    max-height: 80vh;
+    min-height: 300px;
+    text-align: center;
+    scale: auto;
+}
+
+.login-container h1 {
+    color: #0288d1;
+    margin-bottom: 20px;
+    font-family: 'Pacifico', cursive;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0288d1;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-container input[type="submit"] {
+    background-color: #0288d1;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.login-container input[type="submit"]:hover {
+    background-color: #0277bd;
+}
+
+.signup-container {
+    background-color: #ffffff;
+    border: 2px solid #0288d1;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80vw; /* Dynamic width */
+    max-width: 600px; /* Maximum width */
+    min-width: 300px; /* Minimum width */
+    height: auto; /* Dynamic height */
+    max-height: 80vh; /* Maximum height */
+    overflow-y: auto; /* Scrollable if needed */
+    text-align: center;
+    scale: auto;
+}
+
+.signup-container h1 {
+    color: #0288d1;
+    margin-bottom: 20px;
+}
+
+.signup-container .input-group {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.signup-container input[type="text"],
+.signup-container input[type="password"],
+.signup-container input[type="email"] {
+    width: 40%; /* Adjusted width to fill the container */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0288d1;
+    border-radius: 5px;
+}
+
+.signup-container input[type="submit"] {
+    background-color: #0288d1;
+    color: #ffffff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.signup-container input[type="submit"]:hover {
+    background-color: #0277bd;
+}
+
+.footer {
+    background-color: #b2ebf2;
+    color: #ffffff;
+    text-align: center;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Welcome section on landing page */
+.welcome-message
+{
+    font-family: 'Dancing Script', cursive;
+    font-size: .75em;
+    color: #0288d1;
+    text-align: center;
+    margin-top: 6px;
+    margin-bottom: 15px;
+}
+
+.welcome-section {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -25%);
+    width: 80%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border: 2px solid #0288d1;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    color: #0288d1;
+    font-size: 2.0em; 
+    overflow: auto;
+    scale: auto;
+}
+
+
+.login-btns button {
+    background-color: #b2ebf2;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1em;
+    margin: 9px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.login-btns button:hover {
+    background-color: #0277bd;
+    transform: scale(1.5);
+}
+
+.login-btns button:active {
+    background-color: #01579b;
+    transform: scale(0.95);
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
     }
-
-    /* Set background and font */
-    body {
-        font-family: 'Arial', sans-serif;
-        background: #f4f4f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
+    10% {
+        opacity: .5;
     }
-
-    /* Main container */
-    .container {
-        text-align: center;
-        max-width: 600px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    25% {
+        opacity: 1;
     }
+}
 
-    /* Title Styling */
-    h1 {
-        font-size: 36px;
-        color: #333;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
+.login-btns button {
+    animation: blink 7s infinite;
+}
 
-    /* Paragraph styling (optional) */
-    p {
-        font-size: 16px;
-        color: #555;
-        margin-bottom: 30px;
-    }
+/* Enhanced Form Styles */
+.form-group {
+    position: relative;
+    margin-bottom: 20px;
+}
 
-    /* Button styling */
-    .button {
-        font-size: 16px;
-        padding: 15px 30px;
-        background-color: #ff7f50;  /* Coral color */
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        text-transform: uppercase;
-        font-weight: bold;
-        transition: background-color 0.3s ease;
-        margin: 10px;
-    }
+.form-group input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 2px solid #0288d1;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
 
-    /* Button hover effect */
-    .button:hover {
-        background-color: #e66f47;
-    }
+.form-group input:focus {
+    border-color: #0277bd;
+    box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
 
-    /* A container for buttons (if more than one) */
-    .button-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;  /* Adds space between buttons */
-    }
+.form-group label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background-color: #ffffff;
+    padding: 0 5px;
+    font-size: 0.9em;
+    color: #0288d1;
+}
 
-    /* Optional: Add media queries for responsiveness */
-    @media (max-width: 600px) {
-        h1 {
-            font-size: 28px;
-        }
+.error-message {
+    color: #d32f2f;
+    font-size: 0.8em;
+    margin-top: 5px;
+    display: none;
+}
 
-        .container {
-            padding: 15px;
-            width: 90%;
-        }
-    }
+input.invalid {
+    border-color: #d32f2f;
+}
+
+input.invalid + .error-message {
+    display: block;
+}
+
+.submit-button {
+    background-color: #0288d1;
+    color: #ffffff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    font-family: 'Roboto', sans-serif;
+}
+
+.submit-button:hover {
+    background-color: #0277bd;
+    transform: translateY(-2px);
+}
+
+.submit-button:active {
+    background-color: #01579b;
+    transform: translateY(0);
+}
+
+/* Styling for dropdown fields */
+select {
+    width: 92%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0288d1;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #ffffff;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="%230288d1"><path d="M6 9L1 4h10L6 9z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+select:focus {
+    border-color: #0277bd;
+    box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
+
+textarea {
+    width: 87%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0288d1;
+    border-radius: 5px;
+    font-family: 'Roboto', sans-serif;
+    resize: vertical;
+    min-height: 100px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #ffffff;
+}
+
+textarea:focus {
+    border-color: #0277bd;
+    box-shadow: 0 0 5px rgba(2, 136, 209, 0.5);
+}
