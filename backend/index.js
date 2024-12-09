@@ -11,6 +11,16 @@ const port = process.env.PORT || 5001
 
 const session = require('express-session'); 
 
+
+// Session middleware setup
+app.use(session({
+    secret: '123456789', // Replace with a secure secret key
+    resave: false,
+    saveUninitialized: false,
+    cookie: { maxAge: 60 * 60 * 1000 } // Session expires after 60 minutes
+  }));
+
+
 const knex = require("knex") ({
     client : "pg",
     connection : {
