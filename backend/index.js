@@ -83,6 +83,17 @@ app.get("/mileStone", (req, res) =>
     })  
 
 
+// Authentication middleware
+function isAuthenticated(req, res, next) {
+    if (req.session && req.session.isAuthenticated) {
+      // User is authenticated, proceed to the next middleware
+      return next();
+    } else {
+      // User is not authenticated, redirect to login page
+      res.redirect('/login');
+    }
+  }
+
 // This will login the user and redirect them
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
@@ -124,7 +135,18 @@ app.get("/mileStone", (req, res) =>
           });
       });
 
-
+// Logout endpoint
+app.get('/logout', (req, res) => {
+    // Destroy the session
+    req.session.destroy(err => {
+      if (err) {
+        console.error('Error destroying session:', err);
+        return res.status(500).send('Failed to log out. Please try again.');
+      }
+      // Redirect to home page or login page after logout
+      res.redirect('/login'); // Or replace with '/' if you want to redirect to the homepage
+    });
+  });
 
 
 // app listening
