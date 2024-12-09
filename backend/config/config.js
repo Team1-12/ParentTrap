@@ -14,7 +14,7 @@ require('dotenv').config();
 //      - EX. After file requires(config.js)(see below) it can access port number with 'config.port', 
 //            or database password with 'config.db.password' >> console.log(config.db.password) will print pw from .env
 module.exports = {
-  port: process.env.PORT,
+  port: process.env.PORT || 5001,
   db: {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
