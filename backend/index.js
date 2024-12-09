@@ -18,13 +18,13 @@ app.set("views", path.join(__dirname, "../frontend/views")) //This is telling th
 
 app.use(express.urlencoded({extended: true})); //allows us to get data out of the request.body
 
-// Serve static files from the 'CSS' directory
-app.use('/CSS', express.static(path.join(__dirname, '../frontend/css')));
+// Serve static files from the 'css' directory
+app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
 
 //goes to the landing page
 app.get("/", (req, res) => {
 
-    res.render("landingPage", {}); 
+    res.render("index", {}); 
 });
 //goes to the login page
 app.get("/login", (req, res) =>
