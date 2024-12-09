@@ -73,11 +73,37 @@ app.get("/mileStone", (req, res) => {
     res.render("mileStone", {}); 
 });
 
-//goes to the home page
-app.get("/displayMileStone", (req, res) => {
 
-    res.render("displayMileStone", {}); 
+//Route to display milestone records 
+app.get('/displayMileStone', (req, res) => {
+    knex('milestones')
+      .select(
+        'milestoneid',
+        'milestonetitle',
+        'trimester',
+        'milestonedate',
+        'journal'
+      )
+      .then(milestones => {
+        // Render the index.ejs template and pass the data
+        res.render('displayMileStone', { milestones });
+      })
+      // Memorize or paste in to the end of all 
+      .catch(error => {
+        console.error('Error querying database:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+  
+
+
+//goes to the record edit page
+app.get("/editMileStone", (req, res) => {
+
+    res.render("editMileStone", {}); 
 });
+
+
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
@@ -92,6 +118,7 @@ app.get("/mileStone", (req, res) =>
     {
         knex('milestones')
             .select(
+            'milestoneid',
             'milestonetitle',
             'milestonedesription',
             'milestonedate'    
