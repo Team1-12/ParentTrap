@@ -73,9 +73,20 @@ app.get("/mileStone", (req, res) => {
     res.render("mileStone", {}); 
 });
 
+// Checks to see if they are logged in before allowing them to go to displayMilestone
+app.get('/userRedirect', (req, res) => {
+    if (req.session && req.session.isAuthenticated) {
+      res.redirect('/displayMileStone'); // Redirect to displayMileStone if authenticated as admin
+    } else {
+      res.redirect('/loginpage'); // Redirect to login if not authenticated
+    }
+  }); 
+
 
 //Route to display milestone records 
 app.get('/displayMileStone', (req, res) => {
+    const userid = req.session.userid; // Get the userid from the session
+
     knex('milestones')
       .select(
         'milestoneid',
@@ -84,6 +95,7 @@ app.get('/displayMileStone', (req, res) => {
         'milestonedate',
         'journal'
       )
+      .where('userid', userid)
       .then(milestones => {
         // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
@@ -113,11 +125,59 @@ app.get('/displayMileStone', (req, res) => {
   });   
 
 
-//goes to the record edit page
-app.get("/editMileStone", (req, res) => {
-
-    res.render("editMileStone", {}); 
-});
+//Looks up the milestone and fetches data to put into the editMilestone page
+app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
+    const milestoneid = req.params.milestoneid;
+  
+     //Query the Event by eventid
+    knex('milestone')
+      .where('milestoneid', milestoneid)
+      .first()
+      .then(milestone => {
+        if (!milestone) {
+          return res.status(404).send('Milestone not found');
+        }
+        res.render('editMilestone', { milestone }); // Pass the milestone data to the template
+      })
+      .catch(error => {
+        console.error('Error fetching milestone for editing:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+  
+// Post the updated milestone into the database
+  app.post('/editMilestone/:milestoneid', isAuthenticated,(req, res) => {
+    const userid = req.session.userid;
+    const milestoneid = req.params.milestoneid;
+  
+        // Access each value directly from req.body
+        const milestonetitle = req.body.milestonetitle;
+    
+        const trimester = req.body.trimester;
+    
+        const milestonedate = req.body.milestonedate;
+    
+        const journal = req.body.journal;
+    
+    
+        // Update the milestone in the database
+        knex('milestone')
+          .where('milestoneid', milestoneid)
+          .update({
+            userid: userid,
+            milestonetitle: milestonetitle.toLowerCase(),
+            trimester: trimester.toLowerCase(),
+            milestonedate: milestonedate,
+            journal: journal,
+          })
+          .then(() => {
+            res.redirect('/displayMileStone'); // Redirect to the list of Milestones after saving
+          })
+          .catch(error => {
+            console.error('Error updating milestone:', error);
+            res.status(500).send('Internal Server Error');
+          });
+      });
 
 
 
@@ -207,6 +267,10 @@ app.get('/logout', (req, res) => {
     });
   });
 // ---------------------
+
+
+
+
 
 // app listening
 app.listen(port, () => console.log("Express App has started and server is listening!"));
