@@ -62,12 +62,6 @@ app.get("/signup", (req, res) =>
 });
 
 //goes to the home page
-app.get("/homepage", (req, res) => {
-
-    res.render("homepage", {}); 
-});
-
-//goes to the home page
 app.get("/mileStone", (req, res) => {
 
     res.render("mileStone", {}); 
@@ -85,6 +79,7 @@ app.get('/userRedirect', (req, res) => {
 
 //Route to display milestone records 
 app.get('/displayMileStone', (req, res) => {
+    
     const userid = req.session.userid; // Get the userid from the session
 
     knex('milestones')
@@ -162,6 +157,67 @@ app.post('/submitMilestone', (req, res) => {
         res.status(500).send('Internal Server Error');
       });
   });   
+
+// To post the new milestone to the database
+app.post('/submitMileStoneForm', (req, res) => {
+
+  // Access each value directly from req.body
+  const milestonetitle = req.body.milestonetitle;
+
+  const trimester = req.body.trimester;
+
+  const milestonedate = req.body.milestonedate; 
+
+  const journal = req.body.journal;
+
+
+  // Insert the Volunteer in the database
+  knex('milestones')
+    .insert({
+      milestonetitle: milestonetitle.toLowerCase(),
+      trimester: trimester.toLowerCase(),
+      milestonedate: milestonedate,
+      journal: journal.toLowerCase()
+    })
+    .then(() => {
+      if (req.session && req.session.isAuthenticated) {
+        res.redirect('/displayMileStone'); // Redirect to internalLanding if authenticated
+      } else {
+        res.redirect('/loginpage'); // Redirect to login if not authenticated
+      }
+    })
+    .catch(error => {
+      console.error('Error adding Milestone:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
+
+app.get('/searchMilestone', (req, res) => {
+    const userid = req.session.userid; // Ensure the user is logged in
+    const searchQuery = req.query.query; // Get the search query from the URL
+
+    if (!userid) {
+        return res.redirect('/login'); // Redirect to login if not authenticated
+    }
+
+    knex('milestones')
+        .select(
+            'milestoneid',
+            'milestonetitle',
+            'trimester',
+            'milestonedate',
+            'journal'
+        )
+        .where('userid', userid)
+        .andWhere('milestonetitle', 'ilike', `%${searchQuery}%`) // Search with case-insensitive partial match
+        .then(milestones => {
+            res.render('displayMileStone', { milestones });
+        })
+        .catch(error => {
+            console.error('Error querying database:', error);
+            res.status(500).send('Internal Server Error');
+        });
+});
 
 
 //Looks up the milestone and fetches data to put into the editMilestone page
