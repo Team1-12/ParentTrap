@@ -62,12 +62,6 @@ app.get("/signup", (req, res) =>
 });
 
 //goes to the home page
-app.get("/homepage", (req, res) => {
-
-    res.render("homepage", {}); 
-});
-
-//goes to the home page
 app.get("/mileStone", (req, res) => {
 
     res.render("mileStone", {}); 
@@ -197,6 +191,34 @@ app.post('/submitMileStoneForm', (req, res) => {
       res.status(500).send('Internal Server Error');
     });
 });
+
+app.get('/searchMilestone', (req, res) => {
+    const userid = req.session.userid; // Ensure the user is logged in
+    const searchQuery = req.query.query; // Get the search query from the URL
+
+    if (!userid) {
+        return res.redirect('/login'); // Redirect to login if not authenticated
+    }
+
+    knex('milestones')
+        .select(
+            'milestoneid',
+            'milestonetitle',
+            'trimester',
+            'milestonedate',
+            'journal'
+        )
+        .where('userid', userid)
+        .andWhere('milestonetitle', 'ilike', `%${searchQuery}%`) // Search with case-insensitive partial match
+        .then(milestones => {
+            res.render('displayMileStone', { milestones });
+        })
+        .catch(error => {
+            console.error('Error querying database:', error);
+            res.status(500).send('Internal Server Error');
+        });
+});
+
 
 //Looks up the milestone and fetches data to put into the editMilestone page
 app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
