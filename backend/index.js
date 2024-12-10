@@ -75,7 +75,7 @@ app.get('/displayMileStone', (req, res) => {
         'journal'
       )
       .then(milestones => {
-        // Render the index.ejs template and pass the data
+        // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
       })
       // Memorize or paste in to the end of all 
@@ -85,6 +85,22 @@ app.get('/displayMileStone', (req, res) => {
       });
   });
   
+  // this chunk of code finds the record with the primary key aka id and deletes the record
+  app.post('/deleteMileStone/:milestoneid', (req, res) => {
+
+    const milestoneid = req.params.id;
+
+    knex('milestones')
+      .where('milestoneid', milestoneid)
+      .del() // Deletes the record with the specified ID
+      .then(() => {
+        res.redirect('/displayMileStone'); // Redirect to the milestone list after deletion
+      })
+      .catch(error => {
+        console.error('Error deleting Pokémon:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });   
 
 
 //goes to the record edit page
@@ -103,24 +119,6 @@ app.post("/signup", (req, res) => {
             res.status(500).send('Internal Server Error');
           });
     });
-
-app.get("/mileStone", (req, res) =>
-    {
-        knex('milestones')
-            .select(
-            'milestoneid',
-            'milestonetitle',
-            'milestonedesription',
-            'milestonedate'    
-            )
-            .then(milestone => {  
-                res.render('index', { milestone });
-            })
-            .catch(error => {
-                console.error('Error querying database:', error);
-                res.status(500).send('Internal Server Error');
-                });
-    })  
 
 
 // Authentication middleware
