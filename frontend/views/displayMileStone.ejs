@@ -39,6 +39,7 @@
                         <th>Trimester</th>
                         <th>Date of Milestone</th>
                         <th>Journal Entry</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,12 +50,13 @@
                                 <td><%= row.milestonetitle %></td>
                                 <td><%= row.trimester %></td>
                                 <td><%= new Date(row.milestonedate).toLocaleDateString('en-US') %></td>
+                                <td><%= row.journal %></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <form action="/editMileStone/<%= row.id %>" method="GET" class="me-2">
+                                        <form action="/editMileStone/<%= row.milestoneid %>" method="GET" class="me-2">
                                             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                         </form>
-                                        <form action="/deleteMileStone/<%= row.id %>" method="POST">
+                                        <form action="/deleteMileStone/<%= row.milestoneid %>" method="POST">
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                         </form>
                                     </div>
@@ -63,7 +65,7 @@
                         <% }); %>
                     <% } else { %>
                         <tr>
-                            <td colspan="4" class="text-center">No data available</td>
+                            <td colspan="5" class="text-center">No data available</td>
                         </tr>
                     <% } %>
                 </tbody>
