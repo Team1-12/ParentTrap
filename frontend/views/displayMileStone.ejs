@@ -3,56 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mile Stone Records</title>
+    <title>Milestone Records</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1 style="text-align: center;">Milestone Records</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Milestone Name</th>
-          <th>Trimester </th>
-          <th>Date of Milestone</th>
-          <th>Journal Entry</th>
-        </tr>
-      </thead>
-      <tbody>
-          <!-- the less than, percentage sign is for when we are NOT grabbing data-->
-        <% if (milestones.length > 0) { %>
-          <% milestones.forEach(row => { %>
-            <tr>
-              <!-- have the primary key which is the id and make it hidden on the page-->
-              <input type="hidden" value="row.id"> 
-              <td><%= row.description %></td>
-              <td><%= row.base_total %></td>
-              <!-- put in date bc it came over in a string and then change it to the US style-->
-              <td><%= new Date(row.date_created).toLocaleDateString('en-US') %></td> <!-- Format date -->
-              <!-- ? is an inline if statement (the book talks about it)-->
-              <td><%= row.active_poke ? 'Yes' : 'No' %></td>
-              <td><%= row.gender %></td>
-              <td><%= row.poke_type_description %></td>
-              <td>
-                  <!-- each of the buttons have their own form so that they can be called one at a time 
-                  and so that when they are clicked they will call a different route-->
-  
-                <form action="/editMileStone/<%= row.id %>" method="GET" style="display:inline;">
-                  <button type="submit">Edit</button>
-                </form>
-                <form action="/deleteMileStone/<%= row.id %>" method="POST" style="display:inline;">
-                  <button type="submit" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
-                </form>
-              </td>
-            </tr>
-          <% }) %>
-        <% } else { %>
-          <tr>
-            <td colspan="4">No data available</td>
-          </tr>
-        <% } %>
-      </tbody>
-    </table>
-    <form action="/mileStone" method="GET" style="display: flex; justify-content: center; margin: 20px 0;">
-      <button type="submit">Add</button>
-    </form>
+    
+   <!-- Navigation-->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+    <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
+        <a class="navbar-brand" href="/" style="color: #b2ebf2;">
+            Splish Splash Baby Bash
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+            Menu
+            <i class="fas fa-bars ml-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+    <main class="container mt-5">
+        <h1 class="text-center mb-4">Milestone Records</h1>
+        
+        <!-- Table -->
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Milestone Name</th>
+                        <th>Trimester</th>
+                        <th>Date of Milestone</th>
+                        <th>Journal Entry</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (milestones.length > 0) { %>
+                        <% milestones.forEach(row => { %>
+                            <tr>
+                                <input type="hidden" value="<%= row.milestoneid %>"> 
+                                <td><%= row.milestonetitle %></td>
+                                <td><%= row.trimester %></td>
+                                <td><%= new Date(row.milestonedate).toLocaleDateString('en-US') %></td>
+                                <td><%= row.journal %></td>
+                                <td>
+                                    <div class="d-flex justify-content-center">
+                                        <form action="/editMilestone/<%= row.milestoneid %>" method="GET" class="me-2">
+                                            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+                                        </form>
+                                        <form action="/deleteMileStone/<%= row.milestoneid %>" method="POST">
+                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="5" class="text-center">No data available</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Add Button -->
+        <div class="text-center mt-4">
+            <form action="/mileStone" method="GET">
+                <button type="submit" class="btn btn-success">Add Milestone</button>
+            </form>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

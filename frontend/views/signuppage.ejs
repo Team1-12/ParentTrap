@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+    .foot{
+            position:fixed;bottom:0;left:0;right:0;height:30px;
+        }
+    </style>
 </head>
 <body>
 <div class="banner">
@@ -15,17 +20,17 @@
     <h2>Sign Up</h2>
     <form action="/signup" method="POST">
         <div class="form-group">
-            <label for="userfirstname">First Name:</label>
-            <input type="text" id="userfirstname" name="userfirstname" required>
+            <label for="firstname">First Name:</label>
+            <input type="text" id="firstname" name="firstname" required>
         </div>
         <div class="form-group">
-            <label for="userlastname">Last Name:</label>
-            <input type="text" id="userlastname" name="userlastname" required>
+            <label for="lastname">Last Name:</label>
+            <input type="text" id="lastname" name="lastname" required>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="userbirthdate">Birthday:</label>
             <input type="date" id="userbirthdate" name="userbirthdate" required>
-        </div>
+        </div> -->
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -36,7 +41,7 @@
         </div> -->
         <div class="form-group">
             <label for="userpassword">Password:</label>
-            <input type="userpassword" id="userpassword" name="userpassword" required>
+            <input type="userpassword" id="password" name="password" required>
         </div>
         <!-- <div class="form-group">
             <label for="confirmPassword">Confirm Password:</label>
@@ -44,12 +49,12 @@
         </div> -->
         <button class="sign-up-button" type="submit">Sign Up</button>
     </form>
-    <p>Already have an account? Login <a href="/login">here</a></p>
+    <p>Already have an account? Login <a href="/loginpage">here</a></p>
 </div>
-
+<div class = "foot">
 <footer class="footer">
     <p>&copy; 2024 Splish-Splash Baby Bash. All rights reserved.</p>
 </footer>
-
+</div>
 </body>
 </html>

@@ -23,27 +23,36 @@
             <a class="navbar-brand" href="/" style="color: #b2ebf2;">
                 Splish Splash Baby Bash
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
                 Menu
-                <i class="fas fa-bars ms-1"></i>
+                <i class="fas fa-bars ml-1"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/milestones">Milestones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/resources">Resources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/contact">Contact</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <!-- Masthead-->
-    <header class="masthead">
-        <div class="container" style="background-color: rgba(30, 30, 30, 0.5); box-shadow: none;">
+    <header class="masthead" style="position: relative; overflow: hidden;">
+        <!-- Video Background -->
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+            <iframe
+                src="https://www.youtube.com/embed/_NTfTd4HCRo?autoplay=1&mute=1&loop=1&playlist=_NTfTd4HCRo&controls=0&showinfo=0&modestbranding=1&autohide=1"
+                frameborder="0"
+                allowfullscreen
+                style="width: 100%; height: 100%; pointer-events: none;"
+            ></iframe>
+        </div>
+        <!-- Content -->
+        <div class="container" style="position: relative; z-index: 1; background-color: rgba(30, 30, 30, 0.5); box-shadow: none;">
             <div class="masthead-subheading">Welcome!</div>
             <div style="margin-bottom: 30px;" class="masthead-heading text-uppercase">Splish Splash Baby Bash</div>
-            <div><a class="btn btn-primary btn-xl text-uppercase" style="color: #53d5e6;" href="/mileStones">Get Started</a></div>
+            <div><a class="btn btn-primary btn-xl text-uppercase" style="color: #b2ebf2;" href="/mileStones">Get Started</a></div>
         </div>
     </header>
     <!-- Introduction Section-->
@@ -96,7 +105,7 @@
         </div>
     </section>
     <!-- Newsletter Section -->
-    <section class="page-section" id="newsletter">
+    <section class="page-section" id="newsletter" style="padding-top: 15px;">
         <div class="container">
             <div class="text-center">
                 <h2 class="section-heading text-uppercase">Stay Informed</h2>
@@ -162,14 +171,6 @@
         <div class="row align-items-center">
             <div class="col-lg-4 text-lg-start ms-3 text-white">
                 Copyright &copy; Splish Splash Baby Bash 2024
-            </div>
-            <div class="col-lg-4 my-3 my-lg-0 d-flex justify-content-center">
-                <a class="btn btn-dark btn-social mx-2" href="#" target="_blank" aria-label="Facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a class="btn btn-dark btn-social mx-2" href="#" target="_blank" aria-label="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
             </div>
         </div>
     </footer>
