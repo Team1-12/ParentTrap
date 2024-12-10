@@ -22,7 +22,7 @@
       /* background-color: #b2ebf2;  */
     }
   </style>
-  
+
   <!-- Navigation-->
   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
     <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
@@ -48,11 +48,11 @@
       <div class="container">
       <div class="login-container">
         <h1>Milestone Form</h1>
-        <form id="MileStoneForm" method="post" action="/submitMileStoneForm">
+        <form id="MileStoneForm" method="post" action="/submitMilestone">
 
           <div class="form-group">
-            <label for="milestoneOptions">Select Milestone *</label>
-            <select name="MilestoneOptions" id="milestoneOptions" required>
+            <label for="milestonetitle">Select Milestone *</label>
+            <select name="milestonetitle" id="milestonetitle" required>
               <option value="">Please Select an Option</option>
               <option value="firstPositiveTest">First Positive Pregnancy Test</option>
               <option value="firstDoctorVisit">First Doctor’s Appointment</option>
@@ -73,23 +73,23 @@
     
           <div class="form-group">
             <label for="trimester">Trimester *</label>
-            <select name="Trimester" id="trimester" required>
+            <select name="trimester" id="trimester" required>
               <option value="">Please Select an Option</option>
-              <option value="firstTrimester">First Trimester</option>
-              <option value="secondTrimester">Second Trimester</option>
-              <option value="thirdTrimester">Third Trimester</option>
+              <option value= 1 >First Trimester</option>
+              <option value= 2 >Second Trimester</option>
+              <option value= 3 >Third Trimester</option>
             </select>
             <span class="error-message">This field is required.</span>
           </div>
     
           <div class="form-group">
-            <label for="milestoneDate">Date of Milestone *</label>
-            <input type="date" id="milestoneDate" name="MilestoneDate" required />
+            <label for="milestonedate">Date of Milestone *</label>
+            <input type="date" id="milestonedate" name="milestonedate" required />
           </div>
     
           <div class="form-group">
-            <label for="milestoneNotes">Journaling</label>
-            <textarea id="milestoneNotes" name="MilestoneNotes" placeholder="Record the excitement, fun, and emotion of the milestone!" rows="5"></textarea>
+            <label for="journal">Journaling</label>
+            <textarea id="journal" name="journal" placeholder="Record the excitement, fun, and emotion of the milestone!" rows="5"></textarea>
           </div>
     
             <button class="btn btn-primary btn-md text-uppercase" type="submit" >Submit Information</button>             

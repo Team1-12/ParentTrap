@@ -23,7 +23,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/index">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
                 <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
             </ul>
@@ -57,7 +57,7 @@
                                 <td><%= row.journal %></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <form action="/editMileStone/<%= row.milestoneid %>" method="GET" class="me-2">
+                                        <form action="/editMilestone/<%= row.milestoneid %>" method="GET" class="me-2">
                                             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                         </form>
                                         <form action="/deleteMileStone/<%= row.milestoneid %>" method="POST">
