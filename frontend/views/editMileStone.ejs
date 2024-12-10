@@ -11,24 +11,24 @@
 </head>
 <body>
     <!-- Navigation-->
-   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
-    <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
-        <a class="navbar-brand" href="/" style="color: #b2ebf2;">
-            Splish Splash Baby Bash
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
-            Menu
-            <i class="fas fa-bars ml-1"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
-                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+        <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
+            <a class="navbar-brand" href="/" style="color: #b2ebf2;">
+                Splish Splash Baby Bash
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+                Menu
+                <i class="fas fa-bars ml-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                    <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
         <main class="container mt-5 pt-5">
             <h1 class="text-center mb-4">Edit Milestone</h1>
@@ -104,5 +104,31 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/getUser')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Not logged in');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const username = data.username;
+                    const loginNavItem = document.getElementById('loginNavItem');
+                    loginNavItem.innerHTML = `
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            ${username}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        </ul>
+                    `;
+                    loginNavItem.classList.remove('nav-item');
+                    loginNavItem.classList.add('nav-item', 'dropdown');
+                })
+                .catch(error => console.log(error.message));
+        });
+    </script>
 </body>
 </html>
