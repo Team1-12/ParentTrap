@@ -110,7 +110,7 @@ app.get('/displayMileStone', (req, res) => {
   // this chunk of code finds the record with the primary key aka id and deletes the record
   app.post('/deleteMileStone/:milestoneid', (req, res) => {
 
-    const milestoneid = req.params.id;
+    const milestoneid = req.params.milestoneid;
 
     knex('milestones')
       .where('milestoneid', milestoneid)
