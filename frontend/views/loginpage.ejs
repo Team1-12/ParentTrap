@@ -5,31 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .foot{
+            position:fixed;bottom:0;left:0;right:0;height:30px;
+        }
+        .form-group{
+            size-adjust: fit;
+        }
+        .login-container{
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+        <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
+            <a class="navbar-brand" href="/" style="color: #b2ebf2;">
+                Splish Splash Baby Bash
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+                Menu
+                <i class="fas fa-bars ml-1"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 <div class="banner">
     <h1>Splish-Splash Baby Bash</h1>
-</div>
+</div class=login>
+
 <br><br><br><br>
 <div class="login-container">
     <h2>Login to create a splash!</h2>
+    <div class="error-message">
+        <% if (typeof error !== 'undefined') { %>
+        <p style="color: red; text-align: center;"><%= error %></p>
+        <% } %>
+    </div>
     <form action="/login" method="POST">
         <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+            <input type="text" id="username" name="username" style="width: 180px" required>
         </div>
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input type="password" id="password" name="password" style="width: 180px"  required>
         </div>
         <button class="sign-up-button"  type="submit">Login</button>
     </form>
     <p>Don't have an account? Sign up <a href="/signUp">here</a></p>
 </div>
-
-<footer class ="footer">
-    <p>&copy; 2024 Splish-Splash Baby Bash. All rights reserved.</p>
-</footer>
-   
+<div class="foot">
+    <footer class ="footer">
+        <p>&copy; 2024 Splish-Splash Baby Bash. All rights reserved.</p>
+    </footer>
+ </div>  
 </body>
 </html>

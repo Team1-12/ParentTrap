@@ -10,26 +10,42 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Milestone Tracker</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Milestones</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Profile</a></li>
-                </ul>
-            </div>
+    
+   <!-- Navigation-->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+    <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
+        <a class="navbar-brand" href="/" style="color: #b2ebf2;">
+            Splish Splash Baby Bash
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+            Menu
+            <i class="fas fa-bars ml-1"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <main class="container mt-5">
         <h1 class="text-center mb-4">Milestone Records</h1>
         
+        <!-- Search Form -->
+        <form action="/searchMilestone" method="GET" class="d-flex mb-3">
+            <input 
+                type="text" 
+                name="query" 
+                class="form-control me-2" 
+                placeholder="Search milestones..." 
+                aria-label="Search" 
+                required>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
         <!-- Table -->
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
@@ -39,6 +55,7 @@
                         <th>Trimester</th>
                         <th>Date of Milestone</th>
                         <th>Journal Entry</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,12 +66,13 @@
                                 <td><%= row.milestonetitle %></td>
                                 <td><%= row.trimester %></td>
                                 <td><%= new Date(row.milestonedate).toLocaleDateString('en-US') %></td>
+                                <td><%= row.journal %></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
-                                        <form action="/editMileStone/<%= row.id %>" method="GET" class="me-2">
+                                        <form action="/editMilestone/<%= row.milestoneid %>" method="GET" class="me-2">
                                             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                         </form>
-                                        <form action="/deleteMileStone/<%= row.id %>" method="POST">
+                                        <form action="/deleteMileStone/<%= row.milestoneid %>" method="POST">
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                         </form>
                                     </div>
@@ -63,7 +81,7 @@
                         <% }); %>
                     <% } else { %>
                         <tr>
-                            <td colspan="4" class="text-center">No data available</td>
+                            <td colspan="5" class="text-center">No data available</td>
                         </tr>
                     <% } %>
                 </tbody>
