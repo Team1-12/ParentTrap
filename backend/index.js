@@ -233,7 +233,7 @@ app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
         if (!milestone) {
           return res.status(404).send('Milestone not found');
         }
-        res.render('editMilestone', { milestone }); // Pass the milestone data to the template
+        res.render('editMileStone', { milestone }); // Pass the milestone data to the template
       })
       .catch(error => {
         console.error('Error fetching milestone for editing:', error);
