@@ -107,6 +107,45 @@ app.get('/displayMileStone', (req, res) => {
         res.status(500).send('Internal Server Error');
       });
   });
+
+// This route is to add a new milestone for the given user
+app.post('/submitMilestone', (req, res) => {
+    // Access each value directly from req.body
+    const milestonetitle = req.body.milestonetitle;
+    
+    const trimester = req.body.trimester;
+
+    const milestonedate = req.body.milestonedate;
+
+    const journal = req.body.journal;
+
+    const userid = req.session.userid; // Get userid from session
+
+    // Check if the userid is present
+    if (!userid) {
+        console.error('User ID is not defined in the session');
+        return res.status(400).send('You must be logged in to submit a milestone.');
+    }
+
+    // Insert the milestone into the database
+    knex('milestones')
+        .insert({
+            userid: userid,  // Associate the milestone with the logged-in user
+            milestonetitle: milestonetitle.toLowerCase(),
+            trimester: trimester,
+            milestonedate: milestonedate,
+            journal: journal,
+        })
+        .then(() => {
+            console.log('Milestone submitted successfully');
+            res.redirect('/displayMileStone'); // Redirect to the milestones display page after submission
+        })
+        .catch(error => {
+            console.error('Error inserting milestone:', error);
+            res.status(500).send('Internal Server Error');
+        });
+});
+
   
   // this chunk of code finds the record with the primary key aka id and deletes the record
   app.post('/deleteMileStone/:milestoneid', (req, res) => {
@@ -164,7 +203,7 @@ app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
     const milestoneid = req.params.milestoneid;
   
      //Query the Event by eventid
-    knex('milestone')
+    knex('milestones')
       .where('milestoneid', milestoneid)
       .first()
       .then(milestone => {
@@ -195,12 +234,12 @@ app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
     
     
         // Update the milestone in the database
-        knex('milestone')
+        knex('milestones')
           .where('milestoneid', milestoneid)
           .update({
             userid: userid,
             milestonetitle: milestonetitle.toLowerCase(),
-            trimester: trimester.toLowerCase(),
+            trimester: trimester,
             milestonedate: milestonedate,
             journal: journal,
           })
@@ -217,12 +256,42 @@ app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
 
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
-    Users.createUser(req.body) // Using Users model to insert new user
-        .then(() => res.redirect("./homepage")).catch(error => {
-            console.error('Error inserting data:', error);
-            res.status(500).send('Internal Server Error');
-          });
-    });
+    const { username, password, firstname, lastname } = req.body;
+
+    // Input validation (you can expand this based on requirements)
+    if (!username || !password || !firstname || !lastname) {
+        return res.status(400).send('All fields are required.');
+    }
+
+    // Use a transaction to ensure both inserts happen together
+  knex.transaction(trx => {
+    return trx('security')
+      .insert({
+        username: username,
+        password, password,
+      })
+      .returning('userid') // Return the ID of the inserted volunteer
+      .then(userIds => {
+        const userid = Array.isArray(userIds) && typeof userIds[0] === 'object'
+          ? userIds[0].userid // Extract ID if knex returns an object
+          : userIds[0]; // Extract ID if knex returns a plain array
+
+        // Insert the admin record with the foreign key reference to the volunteer
+        return trx('users').insert({
+          userid: userid,
+          firstname: firstname,
+          lastname: lastname,
+        });
+      });
+    })
+      .then(() => {
+        res.redirect('/loginpage'); // Redirect after successful insertion
+      })
+      .catch(error => {
+        console.error('Error adding user:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });
 
 
 // Authentication middleware
@@ -232,7 +301,7 @@ function isAuthenticated(req, res, next) {
       return next();
     } else {
       // User is not authenticated, redirect to login page
-      res.redirect('/login');
+      res.redirect('/loginpage');
     }
   }
 
@@ -247,7 +316,7 @@ app.get('/login', (req, res) => {
     }
   
     // If not authenticated, render the login page
-    res.render('login');
+    res.render('loginpage');
   });
 
 // This will login the user and redirect them
@@ -267,7 +336,8 @@ app.get('/login', (req, res) => {
             if (user) {
               // Set session variables
               req.session.isAuthenticated = true;
-      
+              req.session.userid = user.userid; // Store userid in the session  
+
               req.session.save(err => {
                 if (err) {
                   console.error('Session save error:', err);
@@ -297,7 +367,7 @@ app.get('/logout', (req, res) => {
         return res.status(500).send('Failed to log out. Please try again.');
       }
       // Redirect to home page or login page after logout
-      res.redirect('/login'); // Or replace with '/' if you want to redirect to the homepage
+      res.redirect('/loginpage'); // Or replace with '/' if you want to redirect to the homepage
     });
   });
 // ---------------------
