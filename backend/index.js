@@ -73,10 +73,19 @@ app.get("/mileStone", (req, res) => {
     res.render("mileStone", {}); 
 });
 
+// Checks to see if they are logged in before allowing them to go to displayMilestone
+app.get('/userRedirect', (req, res) => {
+    if (req.session && req.session.isAuthenticated) {
+      res.redirect('/displayMileStone'); // Redirect to displayMileStone if authenticated as admin
+    } else {
+      res.redirect('/loginpage'); // Redirect to login if not authenticated
+    }
+  }); 
+
 
 //Route to display milestone records 
 app.get('/displayMileStone', (req, res) => {
-    const userid = req.session.userid; // Get the volunteerid from the session
+    const userid = req.session.userid; // Get the userid from the session
 
     knex('milestones')
       .select(
@@ -86,7 +95,7 @@ app.get('/displayMileStone', (req, res) => {
         'milestonedate',
         'journal'
       )
-      .where(userid, userid)
+      .where('userid', userid)
       .then(milestones => {
         // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
