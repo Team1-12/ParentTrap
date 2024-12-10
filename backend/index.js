@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
     res.render("index", {}); 
 });
 //goes to the login page
-app.get("/login", (req, res) =>
+app.get("/loginpage", (req, res) =>
 {
     // no need to specify the extension because we already did in the view engine
     res.render("loginpage", {})
@@ -161,7 +161,7 @@ function isAuthenticated(req, res, next) {
             if (user) {
               // Set session variables
               req.session.isAuthenticated = true;
-              req.session.volunteerid = user.volunteerid; // Store volunteerid in the session
+              req.session.userid = user.userid; // Store volunteerid in the session
       
               req.session.save(err => {
                 if (err) {
