@@ -76,6 +76,8 @@ app.get("/mileStone", (req, res) => {
 
 //Route to display milestone records 
 app.get('/displayMileStone', (req, res) => {
+    const userid = req.session.userid; // Get the volunteerid from the session
+
     knex('milestones')
       .select(
         'milestoneid',
@@ -84,6 +86,7 @@ app.get('/displayMileStone', (req, res) => {
         'milestonedate',
         'journal'
       )
+      .where(userid, userid)
       .then(milestones => {
         // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
@@ -113,11 +116,59 @@ app.get('/displayMileStone', (req, res) => {
   });   
 
 
-//goes to the record edit page
-app.get("/editMileStone", (req, res) => {
-
-    res.render("editMileStone", {}); 
-});
+//Looks up the milestone and fetches data to put into the editMilestone page
+app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
+    const milestoneid = req.params.milestoneid;
+  
+     //Query the Event by eventid
+    knex('milestone')
+      .where('milestoneid', milestoneid)
+      .first()
+      .then(milestone => {
+        if (!milestone) {
+          return res.status(404).send('Milestone not found');
+        }
+        res.render('editMilestone', { milestone }); // Pass the milestone data to the template
+      })
+      .catch(error => {
+        console.error('Error fetching milestone for editing:', error);
+        res.status(500).send('Internal Server Error');
+      });
+  });
+  
+// Post the updated milestone into the database
+  app.post('/editMilestone/:milestoneid', isAuthenticated,(req, res) => {
+    const userid = req.session.userid;
+    const milestoneid = req.params.milestoneid;
+  
+        // Access each value directly from req.body
+        const milestonetitle = req.body.milestonetitle;
+    
+        const trimester = req.body.trimester;
+    
+        const milestonedate = req.body.milestonedate;
+    
+        const journal = req.body.journal;
+    
+    
+        // Update the milestone in the database
+        knex('milestone')
+          .where('milestoneid', milestoneid)
+          .update({
+            userid: userid,
+            milestonetitle: milestonetitle.toLowerCase(),
+            trimester: trimester.toLowerCase(),
+            milestonedate: milestonedate,
+            journal: journal,
+          })
+          .then(() => {
+            res.redirect('/displayMileStone'); // Redirect to the list of Milestones after saving
+          })
+          .catch(error => {
+            console.error('Error updating milestone:', error);
+            res.status(500).send('Internal Server Error');
+          });
+      });
 
 
 
@@ -151,7 +202,7 @@ function isAuthenticated(req, res, next) {
         }
       
         // Query the database to check if the username and password exist
-        knex('admin')
+        knex('security')
           .select('*')
           .where({ username, password }) // Note: Storing plaintext passwords is insecure
           .first()
@@ -159,7 +210,7 @@ function isAuthenticated(req, res, next) {
             if (user) {
               // Set session variables
               req.session.isAuthenticated = true;
-              req.session.volunteerid = user.volunteerid; // Store volunteerid in the session
+              req.session.userid = user.userid; // Store volunteerid in the session
       
               req.session.save(err => {
                 if (err) {
@@ -195,6 +246,10 @@ app.get('/logout', (req, res) => {
       res.redirect('/login'); // Or replace with '/' if you want to redirect to the homepage
     });
   });
+
+
+
+
 
 
 // app listening
