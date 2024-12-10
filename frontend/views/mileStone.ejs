@@ -23,8 +23,8 @@
     }
   </style>
 
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+   <!-- Navigation-->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
     <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
         <a class="navbar-brand" href="/" style="color: #b2ebf2;">
             Splish Splash Baby Bash
@@ -34,10 +34,10 @@
             <i class="fas fa-bars ml-1"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/displayMileStone">Milestone Tracker</a></li>
-                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
             </ul>
         </div>
     </div>
@@ -112,6 +112,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Core theme JS-->
     <script src="../../backend/scripts.js"></script>
+    <script>
+      // Dynamic Navbar Logic
+      document.addEventListener("DOMContentLoaded", function () {
+          fetch('/getUser')
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Not logged in');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  const username = data.username;
+                  const loginNavItem = document.getElementById('loginNavItem');
+                  loginNavItem.innerHTML = `
+                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          ${username}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      </ul>
+                  `;
+                  loginNavItem.classList.remove('nav-item');
+                  loginNavItem.classList.add('nav-item', 'dropdown');
+              })
+              .catch(error => console.log(error.message));
+      });
+    </script>
     <!-- Custom Script -->
 </body>
 </html>
