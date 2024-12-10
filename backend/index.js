@@ -85,6 +85,7 @@ app.get('/userRedirect', (req, res) => {
 
 //Route to display milestone records 
 app.get('/displayMileStone', (req, res) => {
+    
     const userid = req.session.userid; // Get the userid from the session
 
     knex('milestones')
@@ -163,6 +164,39 @@ app.post('/submitMilestone', (req, res) => {
       });
   });   
 
+// To post the new milestone to the database
+app.post('/submitMileStoneForm', (req, res) => {
+
+  // Access each value directly from req.body
+  const milestonetitle = req.body.milestonetitle;
+
+  const trimester = req.body.trimester;
+
+  const milestonedate = req.body.milestonedate; 
+
+  const journal = req.body.journal;
+
+
+  // Insert the Volunteer in the database
+  knex('milestones')
+    .insert({
+      milestonetitle: milestonetitle.toLowerCase(),
+      trimester: trimester.toLowerCase(),
+      milestonedate: milestonedate,
+      journal: journal.toLowerCase()
+    })
+    .then(() => {
+      if (req.session && req.session.isAuthenticated) {
+        res.redirect('/displayMileStone'); // Redirect to internalLanding if authenticated
+      } else {
+        res.redirect('/loginpage'); // Redirect to login if not authenticated
+      }
+    })
+    .catch(error => {
+      console.error('Error adding Milestone:', error);
+      res.status(500).send('Internal Server Error');
+    });
+});
 
 //Looks up the milestone and fetches data to put into the editMilestone page
 app.get('/editMilestone/:milestoneid', isAuthenticated, (req, res) => {
