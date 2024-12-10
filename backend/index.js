@@ -91,6 +91,7 @@ app.get('/displayMileStone', (req, res) => {
         'journal'
       )
       .where('userid', userid)
+      .orderBy('milestonedate', 'asc')
       .then(milestones => {
         // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
