@@ -67,6 +67,24 @@ app.get("/displayMileStone", (req, res) => {
     res.render("displayMileStone", {}); 
 });
 
+//route to Edit the milestone
+app.get("/editMileStone", (req, res) => {
+    knex('milestones')
+    .select(
+        'milestoneid',
+        'milestonetitle',
+        'trimester',
+        'milestonedate',
+        'journal'
+    )
+    .then(milestones => {
+        res.render('editMileStone', { milestones });
+    })
+    .catch(error => {
+        console.error('Error querying database:', error);
+        res.status(500).send('Internal Server Error');
+    });
+});
 // For this, db connection moved to db file, called in /models/users.js which is used here as Users.createUser
 app.post("/signup", (req, res) => {
     Users.createUser(req.body) // Using Users model to insert new user
