@@ -91,6 +91,7 @@ app.get('/displayMileStone', (req, res) => {
         'journal'
       )
       .where('userid', userid)
+      .orderBy('milestonedate', 'asc')
       .then(milestones => {
         // Render the displayMileStone.ejs template and pass the data
         res.render('displayMileStone', { milestones });
@@ -358,7 +359,11 @@ app.get('/login', (req, res) => {
             if (user) {
               // Set session variables
               req.session.isAuthenticated = true;
+
               req.session.userid = user.userid; // Store userid in the session  
+
+              req.session.username = user.username;
+
 
               req.session.save(err => {
                 if (err) {
@@ -380,18 +385,26 @@ app.get('/login', (req, res) => {
           });
       });
 
+app.get('/getUser', (req, res) => {
+    if (req.session && req.session.isAuthenticated) {
+        res.json({ username: req.session.username });
+    } else {
+        res.status(401).json({ message: 'Not logged in' });
+    }
+});    
 // Logout endpoint
 app.get('/logout', (req, res) => {
-    // Destroy the session
     req.session.destroy(err => {
+
       if (err) {
         console.error('Error destroying session:', err);
         return res.status(500).send('Failed to log out. Please try again.');
       }
       // Redirect to home page or login page after logout
       res.redirect('/loginpage'); // Or replace with '/' if you want to redirect to the homepage
+
     });
-  });
+});
 // ---------------------
 
 
