@@ -241,11 +241,11 @@ app.get('/login', (req, res) => {
                 }
       
                 // Redirect to a common landing page after login
-                res.redirect('/displayMileStone');
+                res.redirect('/');
               });
             } else {
               // Render login page with error if invalid credentials
-              res.render('login', { error: 'Invalid username or password.' });
+              res.render('loginpage', { error: 'Invalid username or password.' });
             }
           })
           .catch(err => {
