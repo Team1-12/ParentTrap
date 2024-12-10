@@ -34,6 +34,18 @@
     <main class="container mt-5">
         <h1 class="text-center mb-4">Milestone Records</h1>
         
+        <!-- Search Form -->
+        <form action="/searchMilestone" method="GET" class="d-flex mb-3">
+            <input 
+                type="text" 
+                name="query" 
+                class="form-control me-2" 
+                placeholder="Search milestones..." 
+                aria-label="Search" 
+                required>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+
         <!-- Table -->
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
