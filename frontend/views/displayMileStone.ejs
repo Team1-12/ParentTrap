@@ -21,10 +21,10 @@
             <i class="fas fa-bars ml-1"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/displayMileStone">Milestone Tracker</a></li>
-                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
             </ul>
         </div>
     </div>
@@ -97,5 +97,39 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+   
+    document.addEventListener("DOMContentLoaded", function () {
+        // Fetch the current user's username and update the navbar
+        fetch('/getUser')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Not logged in');
+                }
+                return response.json();
+            })
+            .then(data => {
+                const username = data.username;
+
+                // Replace the "Login" link with a dropdown for the logged-in user
+                const loginNavItem = document.getElementById('loginNavItem');
+                loginNavItem.innerHTML = `
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        ${username}
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    </ul>
+                `;
+                loginNavItem.classList.remove('nav-item');
+                loginNavItem.classList.add('nav-item', 'dropdown');
+            })
+            .catch(error => {
+                console.log(error.message);
+            });
+    });
+
+
+    </script>
 </body>
 </html>
