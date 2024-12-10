@@ -23,8 +23,8 @@
     }
   </style>
 
-  <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+   <!-- Navigation-->
+   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
     <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
         <a class="navbar-brand" href="/" style="color: #b2ebf2;">
             Splish Splash Baby Bash
@@ -34,10 +34,10 @@
             <i class="fas fa-bars ml-1"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/displayMileStone">Milestone Tracker</a></li>
-                <li class="nav-item"><a class="nav-link" href="/loginpage">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+                <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
             </ul>
         </div>
     </div>
@@ -54,19 +54,19 @@
             <label for="milestonetitle">Select Milestone *</label>
             <select name="milestonetitle" id="milestonetitle" required>
               <option value="">Please Select an Option</option>
-              <option value="firstPositiveTest">First Positive Pregnancy Test</option>
-              <option value="firstDoctorVisit">First Doctor’s Appointment</option>
-              <option value="firstUltrasound">First Ultrasound</option>
-              <option value="hearHeartbeat">Hearing Baby’s Heartbeat</option>
-              <option value="genderReveal">Finding Out Baby's Gender</option>
-              <option value="firstFetalMovement">First Fetal Movement</option>
-              <option value="babyShower">Baby Shower</option>
-              <option value="thirdTrimesterStart">Third Trimester Start</option>
-              <option value="packingForHospital">Packing for Hospital</option>
-              <option value="dueDate">Due Date</option>
-              <option value="firstContractions">First Contractions or Labor Signs</option>
-              <option value="babyBirth">Baby’s Birth</option>
-              <option value="postpartumCheckup">Postpartum Check-Up</option>
+              <option value="first Positive Test">First Positive Pregnancy Test</option>
+              <option value="first Doctor Visit">First Doctor’s Appointment</option>
+              <option value="first Ultrasound">First Ultrasound</option>
+              <option value="hear Heartbeat">Hearing Baby’s Heartbeat</option>
+              <option value="gender Reveal">Finding Out Baby's Gender</option>
+              <option value="first Fetal Movement">First Fetal Movement</option>
+              <option value="baby Shower">Baby Shower</option>
+              <option value="third Trimester Start">Third Trimester Start</option>
+              <option value="packing For Hospital">Packing for Hospital</option>
+              <option value="due Date">Due Date</option>
+              <option value="first Contractions">First Contractions or Labor Signs</option>
+              <option value="baby Birth">Baby’s Birth</option>
+              <option value="postpartum Checkup">Postpartum Check-Up</option>
             </select>
             <span class="error-message">This field is required.</span>
           </div>
@@ -112,6 +112,33 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- Core theme JS-->
     <script src="../../backend/scripts.js"></script>
+    <script>
+      // Dynamic Navbar Logic
+      document.addEventListener("DOMContentLoaded", function () {
+          fetch('/getUser')
+              .then(response => {
+                  if (!response.ok) {
+                      throw new Error('Not logged in');
+                  }
+                  return response.json();
+              })
+              .then(data => {
+                  const username = data.username;
+                  const loginNavItem = document.getElementById('loginNavItem');
+                  loginNavItem.innerHTML = `
+                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          ${username}
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      </ul>
+                  `;
+                  loginNavItem.classList.remove('nav-item');
+                  loginNavItem.classList.add('nav-item', 'dropdown');
+              })
+              .catch(error => console.log(error.message));
+      });
+    </script>
     <!-- Custom Script -->
 </body>
 </html>
