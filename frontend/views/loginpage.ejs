@@ -21,9 +21,15 @@
 <div class="banner">
     <h1>Splish-Splash Baby Bash</h1>
 </div class=login>
+
 <br><br><br><br>
 <div class="login-container">
     <h2>Login to create a splash!</h2>
+    <div class="error-message">
+        <% if (typeof error !== 'undefined') { %>
+        <p style="color: red; text-align: center;"><%= error %></p>
+        <% } %>
+    </div>
     <form action="/login" method="POST">
         <div class="form-group">
             <label for="username">Username:</label>

@@ -202,12 +202,26 @@ function isAuthenticated(req, res, next) {
     }
   }
 
+// ----------- LOGIN -----------
+
+app.get('/login', (req, res) => {
+    // Check if the user is already authenticated
+    if (req.session && req.session.isAuthenticated) {
+    
+    return res.redirect('/displayMileStone');
+
+    }
+  
+    // If not authenticated, render the login page
+    res.render('login');
+  });
+
 // This will login the user and redirect them
     app.post('/login', (req, res) => {
         const { username, password } = req.body;
       
         if (!username || !password) {
-          return res.render('login', { error: 'Username and password are required.' });
+          return res.render('loginpage', { error: 'Username and password are required.' });
         }
       
         // Query the database to check if the username and password exist
@@ -219,7 +233,6 @@ function isAuthenticated(req, res, next) {
             if (user) {
               // Set session variables
               req.session.isAuthenticated = true;
-              req.session.userid = user.userid; // Store volunteerid in the session
       
               req.session.save(err => {
                 if (err) {
@@ -227,10 +240,8 @@ function isAuthenticated(req, res, next) {
                   return res.status(500).send('Internal Server Error');
                 }
       
-                // Redirect based on the user's role
-                if (user.isAuthenticated === true) {
-                  res.redirect('/displayMileStone'); // Redirect to milestone page
-                } 
+                // Redirect to a common landing page after login
+                res.redirect('/displayMileStone');
               });
             } else {
               // Render login page with error if invalid credentials
@@ -255,7 +266,7 @@ app.get('/logout', (req, res) => {
       res.redirect('/login'); // Or replace with '/' if you want to redirect to the homepage
     });
   });
-
+// ---------------------
 
 
 
