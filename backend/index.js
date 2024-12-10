@@ -50,7 +50,7 @@ app.get("/", (req, res) => {
     res.render("index", {}); 
 });
 //goes to the login page
-app.get("/login", (req, res) =>
+app.get("/loginpage", (req, res) =>
 {
     // no need to specify the extension because we already did in the view engine
     res.render("loginpage", {})
