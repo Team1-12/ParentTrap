@@ -62,12 +62,6 @@ app.get("/signup", (req, res) =>
 });
 
 //goes to the home page
-app.get("/homepage", (req, res) => {
-
-    res.render("homepage", {}); 
-});
-
-//goes to the home page
 app.get("/mileStone", (req, res) => {
 
     res.render("mileStone", {}); 
