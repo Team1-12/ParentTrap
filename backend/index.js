@@ -44,6 +44,9 @@ app.use(express.urlencoded({extended: true})); //allows us to get data out of th
 // Serve static files from the 'css' directory
 app.use('/css', express.static(path.join(__dirname, '../frontend/css')));
 
+// Serve static files from the 'assets' directory
+app.use('/assets', express.static(path.join(__dirname, '../frontend/assets')));
+
 //goes to the landing page
 app.get("/", (req, res) => {
 
