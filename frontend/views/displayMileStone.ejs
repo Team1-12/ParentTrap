@@ -11,15 +11,20 @@
 </head>
 <body>
     
-    <!-- Navigation-->
+    <!-- Navigation Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
     <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
-        <!-- Logo Image -->
-        <a class="navbar-brand" href="#page-top"><img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash</a>
+        <!-- Logo and Brand Name -->
+        <a class="navbar-brand" href="#page-top">
+            <img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  
+            Splish Splash Baby Bash
+        </a>
+        <!-- Toggle Button for Mobile View -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
             Menu
             <i class="fas fa-bars ml-1"></i>
         </button>
+        <!-- Navbar Links -->
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
                 <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -28,9 +33,10 @@
             </ul>
         </div>
     </div>
-  </nav>
+</nav>
 
-  <section style="padding-top: 80px;">
+<!-- Main Section -->
+<section style="padding-top: 80px;">
     <main class="container mt-5">
         <h1 class="text-center mb-4">Milestone Records</h1>
         
@@ -46,7 +52,7 @@
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
 
-        <!-- Table -->
+        <!-- Milestones Table -->
         <div class="table-responsive">
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
@@ -62,6 +68,7 @@
                     <% if (milestones.length > 0) { %>
                         <% milestones.forEach(row => { %>
                             <tr>
+                                <!-- Hidden Input for Milestone ID -->
                                 <input type="hidden" value="<%= row.milestoneid %>"> 
                                 <td><%= row.milestonetitle %></td>
                                 <td><%= row.trimester %></td>
@@ -69,9 +76,11 @@
                                 <td><%= row.journal %></td>
                                 <td>
                                     <div class="d-flex justify-content-center">
+                                        <!-- Edit Button -->
                                         <form action="/editMilestone/<%= row.milestoneid %>" method="GET" class="me-2">
                                             <button type="submit" class="btn btn-primary btn-sm">Edit</button>
                                         </form>
+                                        <!-- Delete Button with Confirmation -->
                                         <form action="/deleteMileStone/<%= row.milestoneid %>" method="POST">
                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this record?');">Delete</button>
                                         </form>
@@ -80,6 +89,7 @@
                             </tr>
                         <% }); %>
                     <% } else { %>
+                        <!-- Message for No Data -->
                         <tr>
                             <td colspan="5" class="text-center">No data available</td>
                         </tr>
@@ -88,7 +98,7 @@
             </table>
         </div>
     </section>
-        <!-- Add Button -->
+        <!-- Add Milestone Button -->
         <div class="text-center mt-4">
             <form action="/mileStone" method="GET">
                 <button type="submit" class="btn btn-success">Add Milestone</button>
@@ -96,7 +106,7 @@
         </div>
     </main>
 
-    <!-- Bootstrap JS -->
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
    
@@ -129,7 +139,6 @@
                 console.log(error.message);
             });
     });
-
 
     </script>
 </body>

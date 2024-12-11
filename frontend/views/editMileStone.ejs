@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta information -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
     <title>Edit Milestone</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -10,15 +12,19 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Navigation-->
+    <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
         <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
-           <!-- Logo Image -->
-      <a class="navbar-brand" href="#page-top"><img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash</a>
+            <!-- Logo Image -->
+            <a class="navbar-brand" href="#page-top">
+                <img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash
+            </a>
+            <!-- Navbar toggler for mobile view -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
                 Menu
                 <i class="fas fa-bars ml-1"></i>
             </button>
+            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -29,80 +35,80 @@
         </div>
     </nav>
     <section style="padding-top: 80px;">
-    <main class="container mt-5">
-        <h1 class="text-center mb-4">Edit Milestone</h1>
-        
-        <!-- Edit Form -->
-        <form action="/editMileStone/<%= milestone.milestoneid %>" method="POST" class="p-4 border rounded shadow-sm">
-            <!-- Hidden Field for ID -->
-            <input type="hidden" name="id" value="<%= milestone.id %>">
+        <main class="container mt-5">
+            <!-- Page heading -->
+            <h1 class="text-center mb-4">Edit Milestone</h1>
             
-            <!-- Updated Dropdown -->
-<div class="form-group">
-    <label for="milestonetitle" class="form-label">Select Milestone *</label>
-    <select name="milestonetitle" id="milestonetitle" class="form-select" required>
-        <option value="">Please Select an Option</option>
-        <option value="first Positive Test" <%= milestone.milestonetitle === "first positive test" ? "selected" : "" %>>First Positive Pregnancy Test</option>
-        <option value="first Doctor Visit" <%= milestone.milestonetitle === "first doctor visit" ? "selected" : "" %>>First Doctor’s Appointment</option>
-        <option value="first Ultrasound" <%= milestone.milestonetitle === "first ultrasound" ? "selected" : "" %>>First Ultrasound</option>
-        <option value="hear Heartbeat" <%= milestone.milestonetitle === "hear heartbeat" ? "selected" : "" %>>Hearing Baby’s Heartbeat</option>
-        <option value="gender Reveal" <%= milestone.milestonetitle === "gender reveal" ? "selected" : "" %>>Finding Out Baby's Gender</option>
-        <option value="first Fetal Movement" <%= milestone.milestonetitle === "first fetal movement" ? "selected" : "" %>>First Fetal Movement</option>
-        <option value="baby Shower" <%= milestone.milestonetitle === "baby shower" ? "selected" : "" %>>Baby Shower</option>
-        <option value="third Trimester Start" <%= milestone.milestonetitle === "third trimester start" ? "selected" : "" %>>Third Trimester Start</option>
-        <option value="packing For Hospital" <%= milestone.milestonetitle === "packing for hospital" ? "selected" : "" %>>Packing for Hospital</option>
-        <option value="due Date" <%= milestone.milestonetitle === "due date" ? "selected" : "" %>>Due Date</option>
-        <option value="first Contractions" <%= milestone.milestonetitle === "first contractions" ? "selected" : "" %>>First Contractions or Labor Signs</option>
-        <option value="baby Birth" <%= milestone.milestonetitle === "baby birth" ? "selected" : "" %>>Baby’s Birth</option>
-        <option value="postpartum Checkup" <%= milestone.milestonetitle === "postpartum checkup" ? "selected" : "" %>>Postpartum Check-Up</option>
-    </select>
-    <span class="error-message">This field is required.</span>
-</div>
-
-            
-            
-            <!-- Trimester -->
-            <div class="mb-3">
-                <label for="trimester" class="form-label">Trimester</label>
-                <select id="trimester" name="trimester" class="form-select" required>
-                    <option value=1 <%= milestone.trimester === '1' ? 'selected' : '' %>>First Trimester</option>
-                    <option value=2 <%= milestone.trimester === '2' ? 'selected' : '' %>>Second Trimester</option>
-                    <option value=3 <%= milestone.trimester === '3' ? 'selected' : '' %>>Third Trimester</option>
-                </select>
-            </div>
-            
-            <!-- Date of Milestone -->
-            <div class="mb-3">
-                <label for="milestonedate" class="form-label">Date of Milestone</label>
-                <input 
-                    type="date" 
-                    id="milestonedate" 
-                    name="milestonedate" 
-                    class="form-control" 
-                    value="<%= milestone.milestonedate.toISOString().split('T')[0] %>" 
-                    required>
-            </div>
-            
-            <!-- Journal Entry -->
-            <div class="mb-3">
-                <label for="journal" class="form-label">Journal Entry</label>
-                <textarea 
-                    id="journal" 
-                    name="journal" 
-                    class="form-control" 
-                    rows="4" 
-                    required><%= milestone.journal %></textarea>
-            </div>
-            
-            <!-- Update Button -->
-            <div class="text-center">
-                <button type="submit" class="btn btn-success">Update</button>
-            </div>
-        </form>
-    </main>
+            <!-- Edit Form -->
+            <form action="/editMileStone/<%= milestone.milestoneid %>" method="POST" class="p-4 border rounded shadow-sm">
+                <!-- Hidden Field for ID -->
+                <input type="hidden" name="id" value="<%= milestone.id %>">
+                
+                <!-- Milestone selection dropdown -->
+                <div class="form-group">
+                    <label for="milestonetitle" class="form-label">Select Milestone *</label>
+                    <select name="milestonetitle" id="milestonetitle" class="form-select" required>
+                        <option value="">Please Select an Option</option>
+                        <option value="first Positive Test" <%= milestone.milestonetitle === "first positive test" ? "selected" : "" %>>First Positive Pregnancy Test</option>
+                        <option value="first Doctor Visit" <%= milestone.milestonetitle === "first doctor visit" ? "selected" : "" %>>First Doctor’s Appointment</option>
+                        <option value="first Ultrasound" <%= milestone.milestonetitle === "first ultrasound" ? "selected" : "" %>>First Ultrasound</option>
+                        <option value="hear Heartbeat" <%= milestone.milestonetitle === "hear heartbeat" ? "selected" : "" %>>Hearing Baby’s Heartbeat</option>
+                        <option value="gender Reveal" <%= milestone.milestonetitle === "gender reveal" ? "selected" : "" %>>Finding Out Baby's Gender</option>
+                        <option value="first Fetal Movement" <%= milestone.milestonetitle === "first fetal movement" ? "selected" : "" %>>First Fetal Movement</option>
+                        <option value="baby Shower" <%= milestone.milestonetitle === "baby shower" ? "selected" : "" %>>Baby Shower</option>
+                        <option value="third Trimester Start" <%= milestone.milestonetitle === "third trimester start" ? "selected" : "" %>>Third Trimester Start</option>
+                        <option value="packing For Hospital" <%= milestone.milestonetitle === "packing for hospital" ? "selected" : "" %>>Packing for Hospital</option>
+                        <option value="due Date" <%= milestone.milestonetitle === "due date" ? "selected" : "" %>>Due Date</option>
+                        <option value="first Contractions" <%= milestone.milestonetitle === "first contractions" ? "selected" : "" %>>First Contractions or Labor Signs</option>
+                        <option value="baby Birth" <%= milestone.milestonetitle === "baby birth" ? "selected" : "" %>>Baby’s Birth</option>
+                        <option value="postpartum Checkup" <%= milestone.milestonetitle === "postpartum checkup" ? "selected" : "" %>>Postpartum Check-Up</option>
+                    </select>
+                    <span class="error-message">This field is required.</span>
+                </div>
+                
+                <!-- Trimester selection -->
+                <div class="mb-3">
+                    <label for="trimester" class="form-label">Trimester</label>
+                    <select id="trimester" name="trimester" class="form-select" required>
+                        <option value=1 <%= milestone.trimester === '1' ? 'selected' : '' %>>First Trimester</option>
+                        <option value=2 <%= milestone.trimester === '2' ? 'selected' : '' %>>Second Trimester</option>
+                        <option value=3 <%= milestone.trimester === '3' ? 'selected' : '' %>>Third Trimester</option>
+                    </select>
+                </div>
+                
+                <!-- Date of Milestone -->
+                <div class="mb-3">
+                    <label for="milestonedate" class="form-label">Date of Milestone</label>
+                    <input 
+                        type="date" 
+                        id="milestonedate" 
+                        name="milestonedate" 
+                        class="form-control" 
+                        value="<%= milestone.milestonedate.toISOString().split('T')[0] %>" 
+                        required>
+                </div>
+                
+                <!-- Journal Entry -->
+                <div class="mb-3">
+                    <label for="journal" class="form-label">Journal Entry</label>
+                    <textarea 
+                        id="journal" 
+                        name="journal" 
+                        class="form-control" 
+                        rows="4" 
+                        required><%= milestone.journal %></textarea>
+                </div>
+                
+                <!-- Update Button -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success">Update</button>
+                </div>
+            </form>
+        </main>
     </section>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Script to handle user login/logout -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             fetch('/getUser')
@@ -115,6 +121,7 @@
                 .then(data => {
                     const username = data.username;
                     const loginNavItem = document.getElementById('loginNavItem');
+                    // Update navbar to show username and logout option
                     loginNavItem.innerHTML = `
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             ${username}

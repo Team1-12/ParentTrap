@@ -1,54 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta tags for character encoding and responsiveness -->
   <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Splish Splash Baby Bash - Your guide to pregnancy milestones" />
-    <meta name="author" content="" />
-    <title>Milestone Form</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="css/styles.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Page description and author -->
+  <meta name="description" content="Splish Splash Baby Bash - Your guide to pregnancy milestones" />
+  <meta name="author" content="" />
+  <!-- Page title -->
+  <title>Milestone Form</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <!-- Font Awesome icons -->
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <!-- Google fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+  <!-- Core theme CSS (includes Bootstrap) -->
+  <link href="css/styles.css" rel="stylesheet" />
 </head>
 <body>
   <style>
     body {
-      /* background-color: #b2ebf2;  */
+      /* Custom background color */
+      /* background-color: #b2ebf2; */
     }
   </style>
 
-   <!-- Navigation-->
-   <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
     <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
-        <!-- Logo Image -->
-      <a class="navbar-brand" href="#page-top"><img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
-            Menu
-            <i class="fas fa-bars ml-1"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
-                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
-                <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
-            </ul>
-        </div>
+      <!-- Logo and brand name -->
+      <a class="navbar-brand" href="#page-top">
+        <img src="/assets/403Logo.webp" alt="Logo" style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash
+      </a>
+      <!-- Navbar toggler for mobile view -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
+        Menu
+        <i class="fas fa-bars ml-1"></i>
+      </button>
+      <!-- Navbar links -->
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0" id="navbarItems">
+          <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/userRedirect">Milestone Tracker</a></li>
+          <li class="nav-item" id="loginNavItem"><a class="nav-link" href="/loginpage">Login</a></li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<!-- Form Section -->
-    <section style="padding-top: 100px;">
-      <div class="container">
+  <!-- Form Section -->
+  <section style="padding-top: 100px;">
+    <div class="container">
       <div class="login-container">
+        <!-- Form heading -->
         <h1>Milestone Form</h1>
+        <!-- Milestone form -->
         <form id="MileStoneForm" method="post" action="/submitMilestone">
-
+          <!-- Milestone title dropdown -->
           <div class="form-group">
             <label for="milestonetitle">Select Milestone *</label>
             <select name="milestonetitle" id="milestonetitle" required>
@@ -69,75 +79,80 @@
             </select>
             <span class="error-message">This field is required.</span>
           </div>
-    
+          <!-- Trimester selection -->
           <div class="form-group">
             <label for="trimester">Trimester *</label>
             <select name="trimester" id="trimester" required>
               <option value="">Please Select an Option</option>
-              <option value= 1 >First Trimester</option>
-              <option value= 2 >Second Trimester</option>
-              <option value= 3 >Third Trimester</option>
+              <option value="1">First Trimester</option>
+              <option value="2">Second Trimester</option>
+              <option value="3">Third Trimester</option>
             </select>
             <span class="error-message">This field is required.</span>
           </div>
-    
+          <!-- Milestone date input -->
           <div class="form-group">
             <label for="milestonedate">Date of Milestone *</label>
             <input type="date" id="milestonedate" name="milestonedate" required />
           </div>
-    
+          <!-- Journaling textarea -->
           <div class="form-group">
             <label for="journal">Journaling</label>
             <textarea id="journal" name="journal" placeholder="Record the excitement, fun, and emotion of the milestone!" rows="5"></textarea>
           </div>
-    
-            <button class="btn btn-primary btn-md text-uppercase" type="submit" >Submit Information</button>             
+          <!-- Submit button -->
+          <button class="btn btn-primary btn-md text-uppercase" type="submit">Submit Information</button>
         </form>
       </div>
     </div>
-    </section>
-    <!-- Footer-->
-    <footer class="footer py-4" style="background-color: #303030; position: relative; width: 100%;">
-      <div class="row align-items-center">
-          <div class="col-lg-4 text-lg-start ms-3 text-white">
-              Copyright &copy; Splish Splash Baby Bash 2024
-          </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer py-4" style="background-color: #303030; position: relative; width: 100%;">
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-lg-start ms-3 text-white">
+        &copy; Splish Splash Baby Bash 2024
       </div>
+    </div>
   </footer>
-  <!-- Bootstrap core JS-->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="../../backend/scripts.js"></script>
-    <script>
-      // Dynamic Navbar Logic
-      document.addEventListener("DOMContentLoaded", function () {
-          fetch('/getUser')
-              .then(response => {
-                  if (!response.ok) {
-                      throw new Error('Not logged in');
-                  }
-                  return response.json();
-              })
-              .then(data => {
-                  const username = data.username;
-                  const loginNavItem = document.getElementById('loginNavItem');
-                  loginNavItem.innerHTML = `
-                      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          ${username}
-                      </a>
-                      <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                          <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                      </ul>
-                  `;
-                  loginNavItem.classList.remove('nav-item');
-                  loginNavItem.classList.add('nav-item', 'dropdown');
-              })
-              .catch(error => console.log(error.message));
-      });
-    </script>
-    <!-- Custom Script -->
+
+  <!-- Bootstrap core JS -->
+  <!-- jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Popper.js for tooltips and popovers -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Core theme JS -->
+  <script src="../../backend/scripts.js"></script>
+  <script>
+    // Dynamic Navbar Logic
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch('/getUser')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Not logged in');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const username = data.username;
+          const loginNavItem = document.getElementById('loginNavItem');
+          // Update navbar with user information
+          loginNavItem.innerHTML = `
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              ${username}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+          `;
+          loginNavItem.classList.remove('nav-item');
+          loginNavItem.classList.add('nav-item', 'dropdown');
+        })
+        .catch(error => console.log(error.message));
+    });
+  </script>
+  <!-- Custom scripts can be added below -->
 </body>
 </html>
