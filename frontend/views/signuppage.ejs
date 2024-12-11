@@ -1,26 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for character encoding and responsiveness -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
     <title>Sign Up Page</title>
+    <!-- Link to external CSS stylesheet -->
     <link rel="stylesheet" href="/css/styles.css">
+    <!-- Inline styles for the footer -->
     <style>
-        .foot{
-            position:fixed;bottom:0;left:0;right:0;height:30px;
+        .foot {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation-->
+    <!-- Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: #53d5e6;">
         <div class="container-fluid p-0" style="background-color: #53d5e6; margin-left: 10px; margin-right: 10px;">
-            <!-- Logo Image -->
-      <a class="navbar-brand" href="#page-top"><img src="/assets/403Logo.webp" alt="..." style="height: 80px; width: auto; margin-right: 10px;"/>  Splish Splash Baby Bash</a>
+            <!-- Brand logo and name -->
+            <a class="navbar-brand" href="#page-top">
+                <img src="/assets/403Logo.webp" alt="Logo Image" style="height: 80px; width: auto; margin-right: 10px;"/>  
+                Splish Splash Baby Bash
+            </a>
+            <!-- Toggle button for mobile view -->
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" style="color: #b2ebf2;">
                 Menu
                 <i class="fas fa-bars ml-1"></i>
             </button>
+            <!-- Navigation links -->
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
@@ -30,54 +43,67 @@
             </div>
         </div>
     </nav>
+    <!-- Page banner -->
     <div class="banner">
         <h1>Splish-Splash Baby Bash</h1>
     </div>
+    <!-- Sign-up form container -->
     <div class="signup-container" style="padding-top: 115px; padding-bottom: 127px;">
         <div class="container" style="max-width: 400px; margin: 0 auto;">
+            <!-- Sign-up header -->
             <h2 class="text-center">Sign Up</h2>
+            <!-- Error message display -->
             <div class="error-message">
-            <% if (typeof error !== 'undefined') { %>
-                <p class="text-danger text-center"><%= error %></p>
-            <% } %>
+                <% if (typeof error !== 'undefined') { %>
+                    <p class="text-danger text-center"><%= error %></p>
+                <% } %>
             </div>
+            <!-- Sign-up form -->
             <form action="/signup" method="POST">
-            <div class="form-group">
-                <label for="firstname">First Name:</label>
-                <input type="text" id="firstname" name="firstname" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="lastname">Last Name:</label>
-                <input type="text" id="lastname" name="lastname" class="form-control" required>
-            </div>
-            <!-- Other form fields styled similarly -->
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="userpassword">Password:</label>
-                <input type="password" id="password" name="password" class="form-control" required>
-            </div>
-            <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                <!-- First Name input -->
+                <div class="form-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" name="firstname" class="form-control" required>
+                </div>
+                <!-- Last Name input -->
+                <div class="form-group">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" required>
+                </div>
+                <!-- Username input -->
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" class="form-control" required>
+                </div>
+                <!-- Password input -->
+                <div class="form-group">
+                    <label for="userpassword">Password:</label>
+                    <input type="password" id="password" name="password" class="form-control" required>
+                </div>
+                <!-- Submit button -->
+                <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
             </form>
+            <!-- Link to login page -->
             <p class="text-center">Already have an account? Login <a href="/loginpage">here</a></p>
         </div>
     </div>
-<!-- Footer-->
-<footer class="footer py-4 foot" style="background-color: #303030;">
-    <div class="row align-items-center">
-        <div class="col-lg-4 text-lg-start ms-3 text-white" style="padding-bottom: 15px;">
-            Copyright &copy; Splish Splash Baby Bash 2024
+    <!-- Footer section -->
+    <footer class="footer py-4 foot" style="background-color: #303030;">
+        <div class="row align-items-center">
+            <div class="col-lg-4 text-lg-start ms-3 text-white" style="padding-bottom: 15px;">
+                <!-- Footer copyright -->
+                &copy; Splish Splash Baby Bash 2024
+            </div>
         </div>
-    </div>
-</footer>
-<!-- Bootstrap core JS-->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    </footer>
+    <!-- Bootstrap core JavaScript files -->
+    <!-- jQuery library -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Popper.js for tooltips and popovers -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Bootstrap JS library -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <!-- Core theme JS-->
+    <!-- Custom scripts -->
     <script src="../../backend/scripts.js"></script>
 </body>
 </html>
